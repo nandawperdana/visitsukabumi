@@ -11,7 +11,7 @@ public interface SplashPresenter {
         enum ViewState {
             IDLE, LOADING,
             SHOW_SPLASH,
-            OPEN_LOGIN, ERROR
+            OPEN_LOGIN, OPEN_DASHBOARD, ERROR
         }
 
         void showState(ViewState state);

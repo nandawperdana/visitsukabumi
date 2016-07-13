@@ -6,8 +6,8 @@
 
     <string name="action_settings">Settings</string>
     <string name="message.loading">Memuat...</string>
-    <string name="backdrop_title">Kartu Imunisasi</string>
-    <string name="backdrop_subtitle">Ayo Imunisasi Wajib Sejak Dini</string>
+    <string name="backdrop_title">Visit Sukabumi</string>
+    <string name="backdrop_subtitle">2016</string>
 
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -15,5 +15,8 @@
     <string name="action_sign_in_short">Sign in</string>
 
     <string name="action_sign_up">Sign Up</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

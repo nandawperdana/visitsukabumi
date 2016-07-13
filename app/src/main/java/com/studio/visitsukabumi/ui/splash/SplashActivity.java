@@ -17,7 +17,9 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.studio.visitsukabumi.BuildConfig;
 import com.studio.visitsukabumi.R;
+import com.studio.visitsukabumi.presentation.presenters.DashboardPresenter;
 import com.studio.visitsukabumi.presentation.presenters.SplashPresenter;
+import com.studio.visitsukabumi.ui.dashboard.DashboardActivity;
 import com.studio.visitsukabumi.ui.login.LoginActivity;
 import com.studio.visitsukabumi.ui.splash.mvp.SplashModel;
 import com.studio.visitsukabumi.ui.splash.mvp.SplashPresenterImpl;
@@ -70,6 +72,9 @@ public class SplashActivity extends AppCompatActivity implements SplashPresenter
                 break;
             case OPEN_LOGIN:
                 openLogin();
+                break;
+            case OPEN_DASHBOARD:
+                openDashboard();
                 break;
             case ERROR:
                 showError();
@@ -125,6 +130,12 @@ public class SplashActivity extends AppCompatActivity implements SplashPresenter
         this.finish();
     }
 
+    private void openDashboard() {
+        Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
     private void showSplash() {
         new DownloadWebpageTask().execute();
     }
@@ -170,7 +181,7 @@ public class SplashActivity extends AppCompatActivity implements SplashPresenter
         protected void onPostExecute(Boolean aBoolean) {
             doRetrieveModel().setIsServerActive(aBoolean);
             if (aBoolean) {
-                mPresenter.presentState(ViewState.OPEN_LOGIN);
+                mPresenter.presentState(ViewState.OPEN_DASHBOARD);
             } else {
                 mPresenter.presentState(ViewState.ERROR);
                 return;
