@@ -5,7 +5,7 @@
     tools:context="com.studio.visitsukabumi.ui.akomodasi.fragment.HotelBintangFragment">
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/gridview_hotel_bintang"
+        android:id="@+id/gridview_akomodasi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnWidth="90dp"
@@ -13,5 +13,6 @@
         android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp"></GridView>
+        android:verticalSpacing="10dp"
+        tools:listitem="@layout/row_grid_dashboard"></GridView>
 </FrameLayout>

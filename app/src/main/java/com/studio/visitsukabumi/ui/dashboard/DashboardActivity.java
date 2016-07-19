@@ -2,6 +2,7 @@ package com.studio.visitsukabumi.ui.dashboard;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -16,6 +17,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.presentation.presenters.DashboardPresenter;
+import com.studio.visitsukabumi.ui.akomodasi.AkomodasiActivity;
 import com.studio.visitsukabumi.ui.dashboard.adapter.DashboardAdapter;
 import com.studio.visitsukabumi.ui.dashboard.mvp.DashboardModel;
 import com.studio.visitsukabumi.ui.dashboard.mvp.DashboardPresenterImpl;
@@ -43,6 +45,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_dashboard);
 
         init();
 
@@ -95,6 +98,12 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.SENI_BUDAYA, "Seni Budaya", R.drawable.ic_seni_budaya));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.RUMAH_MAKAN, "Rumah Makan", R.drawable.ic_rumah_makan));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.BELANJA, "Belanja", R.drawable.ic_belanja));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KANTOR, "Kantor", R.drawable.ic_pelayanan_publik));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.TRANSPORTASI, "Transportasi", R.drawable.ic_transportasi));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KANTOR, "Pemerintahan", R.drawable.ic_aktivitas));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KANTOR, "Aktifitas", R.drawable.ic_aktivitas));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KANTOR, "Tips Berwisata", R.drawable.ic_event));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KANTOR, "Event", R.drawable.ic_event));
     }
 
     @Override
@@ -162,6 +171,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
             case OBJEK_WISATA:
                 break;
             case AKOMODASI:
+                openAkomodasi();
                 break;
             case SENI_BUDAYA:
                 break;
@@ -184,5 +194,11 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
             case PROFIL:
                 break;
         }
+    }
+
+    private void openAkomodasi() {
+        Intent intent = new Intent(DashboardActivity.this, AkomodasiActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 }

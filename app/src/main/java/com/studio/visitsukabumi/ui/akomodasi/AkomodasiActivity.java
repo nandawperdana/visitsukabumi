@@ -16,6 +16,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.presentation.presenters.AkomodasiPresenter;
 import com.studio.visitsukabumi.ui.akomodasi.adapter.ViewPagerAdapter;
+import com.studio.visitsukabumi.ui.akomodasi.fragment.HotelBintangFragment;
 import com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiModel;
 import com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiPresenterImpl;
 
@@ -75,7 +76,7 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-//        viewPagerAdapter.addFragment(new AktifFragment(), getResources().getString(R.string.belanjaan_tab_active));
+        viewPagerAdapter.addFragment(new HotelBintangFragment(), "Bintang");
 //        viewPagerAdapter.addFragment(new DipakaiFragment(), getResources().getString(R.string.belanjaan_tab_history));
 //        viewPagerAdapter.addFragment(new KadaluarsaFragment(), getResources().getString(R.string.belanjaan_tab_expired));
 

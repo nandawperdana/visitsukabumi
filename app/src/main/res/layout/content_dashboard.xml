@@ -25,7 +25,8 @@
         android:horizontalSpacing="10dp"
         android:verticalSpacing="10dp"
         android:gravity="center"
-        android:stretchMode="columnWidth" >
+        android:stretchMode="columnWidth"
+        tools:listitem="@layout/row_grid_dashboard">
 
     </GridView>
 </RelativeLayout>
