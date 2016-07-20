@@ -17,7 +17,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.studio.visitsukabumi.BuildConfig;
 import com.studio.visitsukabumi.R;
-import com.studio.visitsukabumi.presentation.presenters.DashboardPresenter;
 import com.studio.visitsukabumi.presentation.presenters.SplashPresenter;
 import com.studio.visitsukabumi.ui.dashboard.DashboardActivity;
 import com.studio.visitsukabumi.ui.login.LoginActivity;
@@ -137,7 +136,26 @@ public class SplashActivity extends AppCompatActivity implements SplashPresenter
     }
 
     private void showSplash() {
-        new DownloadWebpageTask().execute();
+        // with timer
+        showSplashTimer(3000);
+
+        // connect to database
+//        new DownloadWebpageTask().execute();
+    }
+
+    private void showSplashTimer(int timeout) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // This method will be executed once the timer is over
+                // Start your app main activity
+                Intent i = new Intent(SplashActivity.this, DashboardActivity.class);
+                startActivity(i);
+
+                // close this activity
+                finish();
+            }
+        }, timeout);
     }
 
     private boolean isServerActive() {

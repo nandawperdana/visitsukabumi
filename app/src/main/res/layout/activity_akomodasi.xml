@@ -19,7 +19,7 @@
             android:id="@+id/toolbar_akomodasi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/green_light"
+            android:background="@color/colorPrimary"
             android:elevation="0dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:layout_collapseMode="pin"
@@ -30,13 +30,14 @@
             android:id="@+id/tablayout_akomodasi"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/green_light"
+            android:background="@color/white_75"
             android:elevation="4dp"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorColor="@color/colorPrimary"
             app:tabIndicatorHeight="2dp"
             app:tabMode="fixed"
-            app:tabTextColor="@color/white" />
+            app:tabSelectedTextColor="@color/colorPrimaryDark"
+            app:tabTextColor="@color/colorPrimary" />
 
     </android.support.design.widget.AppBarLayout>
 

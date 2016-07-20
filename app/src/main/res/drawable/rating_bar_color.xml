@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--<item-->
+        <!--android:id="@+id/ratingbar_background"-->
+        <!--android:drawable="@drawable/skholinguaicon_blue"/>-->
+    <!--<item-->
+        <!--android:id="@+id/ratingbar_secondary_progress"-->
+        <!--android:drawable="@drawable/skholinguaicon_blue"/>-->
+    <!--<item-->
+        <!--android:id="@+id/ratingbar_progress"-->
+        <!--android:drawable="@drawable/skholinguaicon"/>-->
+
+</layer-list>

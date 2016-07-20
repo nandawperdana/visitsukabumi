@@ -31,11 +31,11 @@
                 android:textSize="16sp"
                 android:visibility="visible" />
 
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/button_login_facebook"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
+            <!--<com.facebook.login.widget.LoginButton-->
+                <!--android:id="@+id/button_login_facebook"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:visibility="gone" />-->
         </FrameLayout>
 
         <Button

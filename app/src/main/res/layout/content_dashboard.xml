@@ -9,23 +9,16 @@
     tools:context="com.studio.visitsukabumi.ui.dashboard.DashboardActivity"
     tools:showIn="@layout/activity_dashboard">
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/recyclerview_dashboard"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:clipToPadding="false"-->
-        <!--android:scrollbars="vertical" />-->
-
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    <GridView
         android:id="@+id/gridview_dashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="auto_fit"
         android:columnWidth="90dp"
-        android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
         android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp"
         tools:listitem="@layout/row_grid_dashboard">
 
     </GridView>

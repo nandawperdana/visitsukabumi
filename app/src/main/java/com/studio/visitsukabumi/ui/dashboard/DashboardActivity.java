@@ -5,16 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.squareup.picasso.Picasso;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.presentation.presenters.DashboardPresenter;
 import com.studio.visitsukabumi.ui.akomodasi.AkomodasiActivity;
@@ -32,10 +36,22 @@ import butterknife.ButterKnife;
 public class DashboardActivity extends AppCompatActivity implements DashboardPresenter.DashboardView {
     // views
     ProgressDialog mProgressDialog;
-    @Bind(R.id.toolbar_dashboard)
-    Toolbar toolbar;
+    //    @Bind(R.id.toolbar_dashboard)
+//    Toolbar toolbar;
+    @Bind(R.id.coordinatorlayout_dashboard)
+    CoordinatorLayout coordinatorLayout;
+    //    @Bind(R.id.collapsing_toolbar_dashboard)
+//    CollapsingToolbarLayout collapsingToolbar;
+    @Bind(R.id.appbar_dashboard)
+    AppBarLayout appBarLayout;
+    //    @Bind(R.id.viewpager_dashboard)
+//    ViewPager viewPager;
+//    @Bind(R.id.indicator_dashboard)
+//    CirclePageIndicator circlePageIndicator;
     @Bind(R.id.gridview_dashboard)
     GridView gridView;
+    @Bind(R.id.imageview_dashboard_backdrop)
+    ImageView imageView;
 
     // vars
     DashboardModel mModel;
@@ -73,8 +89,13 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
 
     private void initLayout() {
         initMenu();
-        initToolbar(DashboardActivity.this, toolbar);
+//        initToolbar(DashboardActivity.this, toolbar);
         gridView.setAdapter(new DashboardAdapter(this, mListMenu));
+        Picasso.with(DashboardActivity.this)
+                .load("https://sukabumionline.files.wordpress.com/2011/10/sukabumi-dalam-bingkai.jpg")
+                .placeholder(R.drawable.ic_empty)
+                .error(R.drawable.ic_empty)
+                .into(imageView);
     }
 
     private void initToolbar(AppCompatActivity appCompatActivity, Toolbar toolbar) {
@@ -88,22 +109,25 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
         }
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Beranda");
     }
 
     private void initMenu() {
         this.mListMenu = new ArrayList<DashboardModel.Menu>();
 
+        // menu list
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.OBJEK_WISATA, "Objek Wisata", R.drawable.ic_objek_wisata));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.AKOMODASI, "Akomodasi", R.drawable.ic_aktivitas));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.SENI_BUDAYA, "Seni Budaya", R.drawable.ic_seni_budaya));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.RUMAH_MAKAN, "Rumah Makan", R.drawable.ic_rumah_makan));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.BELANJA, "Belanja", R.drawable.ic_belanja));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KANTOR, "Kantor", R.drawable.ic_pelayanan_publik));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.AKOMODASI, "Akomodasi", R.drawable.ic_akomodasi));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.TEMPAT_MAKAN, "Tempat Makan", R.drawable.ic_rumah_makan));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.TRANSPORTASI, "Transportasi", R.drawable.ic_transportasi));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KANTOR, "Pemerintahan", R.drawable.ic_aktivitas));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KANTOR, "Aktifitas", R.drawable.ic_aktivitas));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KANTOR, "Tips Berwisata", R.drawable.ic_event));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KANTOR, "Event", R.drawable.ic_event));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.SENI_BUDAYA, "Seni Budaya", R.drawable.ic_seni_budaya));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.BELANJA, "Belanja", R.drawable.ic_belanja));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.MAP, "Map", R.drawable.ic_map));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.PELAYANAN_PUBLIK, "Pelayanan Publik", R.drawable.ic_pelayanan_publik));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.EVENT, "Event", R.drawable.ic_event));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.AKTIVITAS, "Aktifitas", R.drawable.ic_aktivitas));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.TIPS, "Tips Berwisata", R.drawable.ic_pelayanan_publik));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.PROFIL, "Profil", R.drawable.ic_objek_wisata));
     }
 
     @Override
@@ -136,8 +160,9 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
             new Handler().post(new Runnable() {
                 public void run() {
                     new MaterialDialog.Builder(DashboardActivity.this)
-                            .content("")
-                            .positiveText("")
+                            .title(R.string.error_general_title)
+                            .content(R.string.error_general_content)
+                            .positiveText("OKE")
                             .onPositive(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
@@ -169,35 +194,46 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
     private void openMenu(Enums.Menu menu) {
         switch (menu) {
             case OBJEK_WISATA:
+                openActivity(AkomodasiActivity.class);
                 break;
             case AKOMODASI:
-                openAkomodasi();
+                openActivity(AkomodasiActivity.class);
                 break;
             case SENI_BUDAYA:
+                openActivity(AkomodasiActivity.class);
                 break;
-            case RUMAH_MAKAN:
+            case TEMPAT_MAKAN:
+                openActivity(AkomodasiActivity.class);
                 break;
             case BELANJA:
+                openActivity(AkomodasiActivity.class);
                 break;
             case TRANSPORTASI:
+                openActivity(AkomodasiActivity.class);
                 break;
             case KANTOR:
+                openActivity(AkomodasiActivity.class);
                 break;
             case PEMERINTAHAN:
+                openActivity(AkomodasiActivity.class);
                 break;
             case LAYANAN_PUBLIK:
+                openActivity(AkomodasiActivity.class);
                 break;
             case AKTIVITAS:
+                openActivity(AkomodasiActivity.class);
                 break;
             case TIPS:
+                openActivity(AkomodasiActivity.class);
                 break;
             case PROFIL:
+                openActivity(AkomodasiActivity.class);
                 break;
         }
     }
 
-    private void openAkomodasi() {
-        Intent intent = new Intent(DashboardActivity.this, AkomodasiActivity.class);
+    private void openActivity(Class activity) {
+        Intent intent = new Intent(DashboardActivity.this, activity);
         startActivity(intent);
         this.finish();
     }

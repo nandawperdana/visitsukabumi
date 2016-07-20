@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/imageview_row_grid_menu"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_aktivitas">
+
+    </ImageView>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_row_grid_menu"
+        android:layout_width="200dp"
+        android:layout_height="62dp"
+        android:layout_alignBottom="@+id/imageview_row_grid_menu"
+        android:layout_centerHorizontal="true"
+        android:background="@color/black_50"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textview_row_grid_menu_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Nama"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_extra_large"
+            android:textStyle="bold" />
+
+        <RatingBar
+            android:id="@+id/ratingbar_row_grid_menu"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:numStars="5"
+            android:rating="2.0"
+            android:stepSize="1" />
+    </LinearLayout>
+
+</RelativeLayout>

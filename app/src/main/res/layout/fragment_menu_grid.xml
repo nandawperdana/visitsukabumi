@@ -1,0 +1,30 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.studio.visitsukabumi.ui.akomodasi.fragment.HotelBintangFragment">
+
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridview_menu_grid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:visibility="visible"
+        tools:listitem="@layout/row_grid_menu"></GridView>
+
+    <TextView
+        android:id="@+id/textview_menu_grid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Tidak ada item ditampilkan :("
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/text_extra_large"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
+
+</FrameLayout>

@@ -8,12 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.presentation.presenters.LoginPresenter;
 import com.studio.visitsukabumi.ui.login.mvp.LoginModel;
@@ -26,10 +20,10 @@ import butterknife.OnClick;
 public class LoginActivity extends AppCompatActivity implements LoginPresenter.LoginView {
     LoginPresenter mPresenter;
     LoginModel mModel;
-    CallbackManager mCallbackManager;
-
-    @Bind(R.id.button_login_facebook)
-    LoginButton buttonLoginFb;
+//    CallbackManager mCallbackManager;
+//
+//    @Bind(R.id.button_login_facebook)
+//    LoginButton buttonLoginFb;
     @Bind(R.id.button_login_facebook_overlay)
     Button buttonLoginOverlay;
     @Bind(R.id.button_login_email)
@@ -40,9 +34,9 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.L
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Facebook stuffs
-        FacebookSdk.sdkInitialize(LoginActivity.this);
-        AppEventsLogger.activateApp(this);
-        this.mCallbackManager = CallbackManager.Factory.create();
+//        FacebookSdk.sdkInitialize(LoginActivity.this);
+//        AppEventsLogger.activateApp(this);
+//        this.mCallbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login);
 
         init();
@@ -61,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.L
     // #OnClick Region
     @OnClick(R.id.button_login_facebook_overlay)
     public void onClickLoginFb() {
-        buttonLoginFb.performClick();
+//        buttonLoginFb.performClick();
         mPresenter.presentState(ViewState.LOAD_LOGIN_FACEBOOK);
     }
 
@@ -71,27 +65,27 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.L
     @Override
     protected void onResume() {
         super.onResume();
-        if (!FacebookSdk.isInitialized()) {
-            FacebookSdk.sdkInitialize(LoginActivity.this);
-            if (mCallbackManager == null) {
-                this.mCallbackManager = CallbackManager.Factory.create();
-            }
-        }
-        // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(LoginActivity.this);
+//        if (!FacebookSdk.isInitialized()) {
+//            FacebookSdk.sdkInitialize(LoginActivity.this);
+//            if (mCallbackManager == null) {
+//                this.mCallbackManager = CallbackManager.Factory.create();
+//            }
+//        }
+//        // Logs 'install' and 'app activate' App Events.
+//        AppEventsLogger.activateApp(LoginActivity.this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         // Logs 'app deactivate' App Event.
-        AppEventsLogger.deactivateApp(LoginActivity.this);
+//        AppEventsLogger.deactivateApp(LoginActivity.this);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+//        mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

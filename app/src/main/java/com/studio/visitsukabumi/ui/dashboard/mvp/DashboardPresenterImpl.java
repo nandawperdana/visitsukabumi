@@ -11,16 +11,21 @@ public class DashboardPresenterImpl implements DashboardPresenter {
     public DashboardPresenterImpl(DashboardView view) {
         this.mView = view;
     }
+
     @Override
     public void presentState(DashboardView.ViewState state) {
         switch (state) {
             case IDLE:
+                mView.showState(DashboardView.ViewState.IDLE);
                 break;
             case LOADING:
+                mView.showState(DashboardView.ViewState.LOADING);
                 break;
             case OPEN_MENU:
+                mView.showState(DashboardView.ViewState.OPEN_MENU);
                 break;
             case ERROR:
+                mView.showState(DashboardView.ViewState.ERROR);
                 break;
         }
     }

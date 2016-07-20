@@ -11,7 +11,12 @@ public interface AkomodasiPresenter extends BasePresenter {
     interface AkomodasiView extends BaseView {
         enum ViewState {
             IDLE, LOADING,
-            OPEN_MENU, ERROR
+            LOAD_HOTEL_BINTANG, SHOW_HOTEL_BINTANG, LOAD_HOTEL_NONBINTANG, SHOW_HOTEL_NONBINTANG,
+            OPEN_MENU, OPEN_DETAIL, ERROR
+        }
+
+        enum ScreenState {
+            SCREEN_BLANK, SCREEN_NOT_BLANK
         }
 
         void showState(ViewState state);

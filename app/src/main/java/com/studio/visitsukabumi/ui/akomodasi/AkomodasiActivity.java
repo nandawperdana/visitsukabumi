@@ -17,6 +17,7 @@ import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.presentation.presenters.AkomodasiPresenter;
 import com.studio.visitsukabumi.ui.akomodasi.adapter.ViewPagerAdapter;
 import com.studio.visitsukabumi.ui.akomodasi.fragment.HotelBintangFragment;
+import com.studio.visitsukabumi.ui.akomodasi.fragment.HotelNonBintangFragment;
 import com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiModel;
 import com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiPresenterImpl;
 
@@ -43,6 +44,32 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
         setContentView(R.layout.activity_akomodasi);
 
         init();
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                doRetrieveModel().setPage(1);
+                doRetrieveModel().setFragmentSelected(position);
+                switch (position) {
+                    case 0:
+                        mPresenter.presentState(ViewState.LOADING);
+                        break;
+                    case 1:
+                        mPresenter.presentState(ViewState.LOADING);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void init() {
@@ -59,6 +86,8 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
 
     private void initLayout() {
         initToolbar(AkomodasiActivity.this, toolbar);
+        if (viewPager != null)
+            setupViewPager(viewPager);
     }
 
     private void initToolbar(AppCompatActivity appCompatActivity, Toolbar toolbar) {
@@ -72,13 +101,13 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
         }
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Akomodasi");
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new HotelBintangFragment(), "Bintang");
-//        viewPagerAdapter.addFragment(new DipakaiFragment(), getResources().getString(R.string.belanjaan_tab_history));
-//        viewPagerAdapter.addFragment(new KadaluarsaFragment(), getResources().getString(R.string.belanjaan_tab_expired));
+        viewPagerAdapter.addFragment(new HotelBintangFragment(), "Hotel Bintang");
+        viewPagerAdapter.addFragment(new HotelNonBintangFragment(), "Hotel Non Bintang");
 
         if (viewPager == null || tabLayout == null) {
             return;
@@ -95,7 +124,25 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
 
     @Override
     public void showState(ViewState state) {
-
+        switch (state) {
+            case IDLE:
+                showProgress(false);
+                break;
+            case LOADING:
+                showProgress(true);
+                break;
+            case SHOW_HOTEL_BINTANG:
+                doRetrieveModel().getHotelBintangFragment().showItems();
+                break;
+            case SHOW_HOTEL_NONBINTANG:
+                doRetrieveModel().getHotelNonBintangFragment().showItems();
+                break;
+            case OPEN_MENU:
+                break;
+            case ERROR:
+                showError();
+                break;
+        }
     }
 
     @Override
@@ -110,8 +157,8 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
             new Handler().post(new Runnable() {
                 public void run() {
                     new MaterialDialog.Builder(AkomodasiActivity.this)
-                            .content("")
-                            .positiveText("")
+                            .content(R.string.error_general_title)
+                            .positiveText(R.string.error_general_content)
                             .onPositive(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
