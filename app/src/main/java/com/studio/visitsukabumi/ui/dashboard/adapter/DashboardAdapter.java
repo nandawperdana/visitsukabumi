@@ -1,11 +1,10 @@
 package com.studio.visitsukabumi.ui.dashboard.adapter;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +19,7 @@ import butterknife.ButterKnife;
 /**
  * Created by nandawperdana on 7/13/2016.
  */
-public class DashboardAdapter extends BaseAdapter {
+public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewHolder> {
     private Context mContext;
     private List<DashboardModel.Menu> mListMenu;
 
@@ -31,13 +30,18 @@ public class DashboardAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
-        return mListMenu.size();
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.row_card_dashboard, parent, false);
+        ViewHolder viewHolder = new ViewHolder(v);
+
+        return viewHolder;
     }
 
     @Override
-    public Object getItem(int position) {
-        return mListMenu.get(position);
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.textView.setText(mListMenu.get(position).getName());
+        holder.imageView.setImageResource(mListMenu.get(position).getImage());
     }
 
     @Override
@@ -46,24 +50,18 @@ public class DashboardAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
-        View row = inflater.inflate(R.layout.row_grid_dashboard, parent, false);
-        ViewHolder holder = new ViewHolder(row);
-
-        holder.textView.setText(mListMenu.get(position).getName());
-        holder.imageView.setImageResource(mListMenu.get(position).getImage());
-
-        return row;
+    public int getItemCount() {
+        return mListMenu.size();
     }
 
-    static class ViewHolder {
-        @Bind(R.id.textview_row_grid)
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.textview_row_dashboard)
         TextView textView;
-        @Bind(R.id.imageview_row_grid)
+        @Bind(R.id.imageview_row_dashboard)
         ImageView imageView;
 
         public ViewHolder(View view) {
+            super(view);
             ButterKnife.bind(this, view);
         }
     }

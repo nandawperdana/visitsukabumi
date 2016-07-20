@@ -1,0 +1,56 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview_row_card_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    card_view:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageview_row_card_item"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/action_settings"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_belanja" />
+
+        <LinearLayout
+            android:id="@+id/linearlayout_row_card_item"
+            android:layout_width="200dp"
+            android:layout_height="62dp"
+            android:layout_alignBottom="@+id/imageview_row_card_item"
+            android:layout_centerHorizontal="true"
+            android:background="@color/black_50"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview_row_card_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Nama"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold" />
+
+            <RatingBar
+                android:id="@+id/ratingbar_row_card_item"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:numStars="5"
+                android:rating="2.5" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

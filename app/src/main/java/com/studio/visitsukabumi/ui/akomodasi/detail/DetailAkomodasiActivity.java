@@ -21,14 +21,13 @@ public class DetailAkomodasiActivity extends AppCompatActivity {
     ImageView imageView;
     ProgressDialog progressDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_akomodasi);
 
         init();
-    }
+     }
 
     private void init() {
         ButterKnife.bind(this);
@@ -60,6 +59,6 @@ public class DetailAkomodasiActivity extends AppCompatActivity {
         }
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle("Detail Akomodasi");
+        actionBar.setTitle("Detail Akomodasi");
     }
 }

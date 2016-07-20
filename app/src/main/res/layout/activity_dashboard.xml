@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorlayout_dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,44 +12,33 @@
         android:id="@+id/appbar_dashboard"
         android:layout_width="match_parent"
         android:layout_height="@dimen/detail_backdrop_height"
+        android:elevation="8dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/toolbar_dashboard"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="@drawable/toolbar_fade_to_primary"-->
-        <!--android:titleTextColor="@color/white"-->
-        <!--app:layout_collapseMode="pin"-->
-        <!--app:layout_scrollFlags="scroll|enterAlways"-->
-        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
-
-        <!--<RelativeLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<android.support.v4.view.ViewPager-->
-        <!--android:id="@+id/viewpager_dashboard"-->
+        <!--<android.support.design.widget.CollapsingToolbarLayout-->
+        <!--android:id="@+id/collapsingtoolbar_dashboard"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
-        <!--android:background="@color/white"-->
-        <!--android:drawable="@color/colorPrimary"-->
-        <!--android:visibility="visible">-->
+        <!--android:fitsSystemWindows="true"-->
+        <!--app:expandedTitleMarginBottom="32dp"-->
+        <!--app:expandedTitleMarginEnd="64dp"-->
+        <!--app:expandedTitleMarginStart="72dp"-->
+        <!--app:expandedTitleTextAppearance="?android:attr/textAppearanceLarge"-->
+        <!--app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
 
-        <!--</android.support.v4.view.ViewPager>-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/toolbar_fade_to_primary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:titleTextColor="@color/white"
+            app:layout_collapseMode="pin"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <!--<com.viewpagerindicator.CirclePageIndicator-->
-        <!--android:id="@+id/indicator_dashboard"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_weight="1"-->
-        <!--app:fillColor="@color/colorPrimary"-->
-        <!--app:pageColor="#635F65"-->
-        <!--app:strokeColor="#00635F65" />-->
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -63,7 +53,6 @@
                 app:layout_collapseMode="parallax" />
 
             <LinearLayout
-                android:id="@+id/linearlayout_row_grid_menu"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_alignBottom="@+id/imageview_dashboard_backdrop"
@@ -86,17 +75,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Objek Wisata dengan keindahan alam yang menjadi unggulan Kab. Sukabumi"
+                    android:text="Objek Wisata "
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_large"
                     android:textStyle="bold" />
-
             </LinearLayout>
+            <!--<android.support.v4.view.ViewPager-->
+            <!--android:id="@+id/viewpager_dashboard"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/white"-->
+            <!--android:drawable="@color/colorPrimary"-->
+            <!--android:visibility="visible">-->
+
+            <!--</android.support.v4.view.ViewPager>-->
+
+            <!--<com.viewpagerindicator.CirclePageIndicator-->
+            <!--android:id="@+id/indicator_dashboard"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_weight="1"-->
+            <!--app:fillColor="@color/colorPrimary"-->
+            <!--app:pageColor="#635F65"-->
+            <!--app:strokeColor="#00635F65" />-->
         </RelativeLayout>
 
-        <!--</RelativeLayout>-->
+        <!--</android.support.design.widget.CollapsingToolbarLayout>-->
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_dashboard" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:scrollbars="vertical"
+        android:visibility="visible"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/row_card_dashboard" />
 
 </android.support.design.widget.CoordinatorLayout>

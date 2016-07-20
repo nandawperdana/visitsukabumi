@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import com.studio.visitsukabumi.R;
@@ -18,6 +18,7 @@ import com.studio.visitsukabumi.presentation.presenters.AkomodasiPresenter;
 import com.studio.visitsukabumi.ui.akomodasi.adapter.GridAdapter;
 import com.studio.visitsukabumi.ui.akomodasi.detail.DetailAkomodasiActivity;
 import com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiModel;
+import com.studio.visitsukabumi.utils.commons.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,9 @@ import butterknife.ButterKnife;
  */
 public class HotelNonBintangFragment extends Fragment {
     // views
-    @Bind(R.id.gridview_menu_grid)
-    GridView gridView;
+    @Bind(R.id.recyclerview_menu_grid)
+    RecyclerView recyclerView;
+    GridLayoutManager gridLayoutManager;
     @Bind(R.id.textview_menu_grid)
     TextView textView;
     ProgressDialog progressDialog;
@@ -59,13 +61,20 @@ public class HotelNonBintangFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(View view, int position) {
                 AkomodasiModel.ItemModel item = mListItem.get(position);
                 openDetails(item);
             }
-        });
+        }));
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                AkomodasiModel.ItemModel item = mListItem.get(position);
+//                openDetails(item);
+//            }
+//        });
     }
 
     private void init(View view) {
@@ -79,7 +88,12 @@ public class HotelNonBintangFragment extends Fragment {
         this.progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
 
-        gridView.setAdapter(new GridAdapter(getActivity(), mListItem));
+        gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        recyclerView.setAdapter(new GridAdapter(getActivity(), mListItem));
+//        gridView.setAdapter(new GridAdapter(getActivity(), mListItem));
     }
 
     private void setDummyItem() {
@@ -108,11 +122,13 @@ public class HotelNonBintangFragment extends Fragment {
         switch (screenState) {
             case SCREEN_BLANK:
                 textView.setVisibility(View.VISIBLE);
-                gridView.setVisibility(View.GONE);
+//                gridView.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
                 break;
             case SCREEN_NOT_BLANK:
                 textView.setVisibility(View.GONE);
-                gridView.setVisibility(View.VISIBLE);
+//                gridView.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.VISIBLE);
                 break;
         }
     }

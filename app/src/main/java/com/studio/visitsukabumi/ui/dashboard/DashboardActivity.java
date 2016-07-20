@@ -9,10 +9,10 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,6 +26,7 @@ import com.studio.visitsukabumi.ui.dashboard.adapter.DashboardAdapter;
 import com.studio.visitsukabumi.ui.dashboard.mvp.DashboardModel;
 import com.studio.visitsukabumi.ui.dashboard.mvp.DashboardPresenterImpl;
 import com.studio.visitsukabumi.utils.commons.Enums;
+import com.studio.visitsukabumi.utils.commons.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,20 +37,21 @@ import butterknife.ButterKnife;
 public class DashboardActivity extends AppCompatActivity implements DashboardPresenter.DashboardView {
     // views
     ProgressDialog mProgressDialog;
-    //    @Bind(R.id.toolbar_dashboard)
-//    Toolbar toolbar;
+    @Bind(R.id.toolbar_dashboard)
+    Toolbar toolbar;
     @Bind(R.id.coordinatorlayout_dashboard)
     CoordinatorLayout coordinatorLayout;
-    //    @Bind(R.id.collapsing_toolbar_dashboard)
-//    CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.appbar_dashboard)
     AppBarLayout appBarLayout;
     //    @Bind(R.id.viewpager_dashboard)
 //    ViewPager viewPager;
 //    @Bind(R.id.indicator_dashboard)
 //    CirclePageIndicator circlePageIndicator;
-    @Bind(R.id.gridview_dashboard)
-    GridView gridView;
+//    @Bind(R.id.gridview_dashboard)
+//    GridView gridView;
+    @Bind(R.id.recyclerview_dashboard)
+    RecyclerView recyclerView;
+    GridLayoutManager gridLayoutManager;
     @Bind(R.id.imageview_dashboard_backdrop)
     ImageView imageView;
 
@@ -65,17 +67,31 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
 
         init();
 
-        gridView.setOnItemClickListener(new GridView.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(DashboardActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(View view, int position) {
                 DashboardModel.Menu menu = mListMenu.get(position);
                 doRetrieveModel().setMenu(menu.getId());
                 mPresenter.presentState(ViewState.OPEN_MENU);
             }
-        });
+        }));
+
+//        gridView.setOnItemClickListener(new GridView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                DashboardModel.Menu menu = mListMenu.get(position);
+//                doRetrieveModel().setMenu(menu.getId());
+//                mPresenter.presentState(ViewState.OPEN_MENU);
+//            }
+//        });
     }
 
     private void init() {
+
+        initLayout();
+    }
+
+    private void initLayout() {
         ButterKnife.bind(this);
         this.mProgressDialog = new ProgressDialog(DashboardActivity.this);
         mProgressDialog.setMessage(getString(R.string.message_loading));
@@ -83,14 +99,16 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
 
         this.mModel = new DashboardModel();
         this.mPresenter = new DashboardPresenterImpl(this);
+        initToolbar(DashboardActivity.this, toolbar);
 
-        initLayout();
-    }
-
-    private void initLayout() {
         initMenu();
-//        initToolbar(DashboardActivity.this, toolbar);
-        gridView.setAdapter(new DashboardAdapter(this, mListMenu));
+
+        gridLayoutManager = new GridLayoutManager(DashboardActivity.this, 3);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        recyclerView.setAdapter(new DashboardAdapter(DashboardActivity.this, mListMenu));
+//        gridView.setAdapter(new DashboardAdapter(this, mListMenu));
         Picasso.with(DashboardActivity.this)
                 .load("https://sukabumionline.files.wordpress.com/2011/10/sukabumi-dalam-bingkai.jpg")
                 .placeholder(R.drawable.ic_empty)
@@ -107,9 +125,9 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
         if (actionBar == null) {
             return;
         }
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle("Beranda");
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setTitle("Visit Sukabumi");
     }
 
     private void initMenu() {
@@ -235,6 +253,5 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
     private void openActivity(Class activity) {
         Intent intent = new Intent(DashboardActivity.this, activity);
         startActivity(intent);
-        this.finish();
     }
 }

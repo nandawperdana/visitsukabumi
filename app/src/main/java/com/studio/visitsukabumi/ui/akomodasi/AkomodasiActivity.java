@@ -101,7 +101,7 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
         }
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle("Akomodasi");
+        actionBar.setTitle("Akomodasi");
     }
 
     private void setupViewPager(ViewPager viewPager) {
