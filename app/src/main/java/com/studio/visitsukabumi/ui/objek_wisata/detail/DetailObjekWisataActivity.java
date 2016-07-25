@@ -1,4 +1,4 @@
-package com.studio.visitsukabumi.ui.akomodasi.detail;
+package com.studio.visitsukabumi.ui.objek_wisata.detail;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,10 +19,10 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.picasso.Picasso;
 import com.studio.visitsukabumi.R;
-import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiModel;
-import com.studio.visitsukabumi.presentation.presenters.DetailAkomodasiPresenter;
-import com.studio.visitsukabumi.ui.akomodasi.detail.mvp.DetailAkomodasiPresenterImpl;
-import com.studio.visitsukabumi.ui.akomodasi.detail.mvp.DetailModel;
+import com.studio.visitsukabumi.api.v1.objekwisata.ObjekWisataModel;
+import com.studio.visitsukabumi.presentation.presenters.DetailObjekWisataPresenter;
+import com.studio.visitsukabumi.ui.objek_wisata.detail.mvp.DetailModel;
+import com.studio.visitsukabumi.ui.objek_wisata.detail.mvp.DetailObjekWisataPresenterImpl;
 
 import java.util.Locale;
 
@@ -29,44 +30,32 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DetailAkomodasiActivity extends AppCompatActivity implements DetailAkomodasiPresenter.DetailAkomodasiView {
+public class DetailObjekWisataActivity extends AppCompatActivity implements DetailObjekWisataPresenter.DetailObjekWisataView {
     // views
-    @Bind(R.id.toolbar_detail_akomodasi)
+    @Bind(R.id.toolbar_detail_objek_wisata)
     Toolbar toolbar;
-    @Bind(R.id.imageview_detail_akomodasi)
+    @Bind(R.id.imageview_detail_objek_wisata)
     ImageView imageView;
     ProgressDialog progressDialog;
-    @Bind(R.id.textview_detail_akomodasi_nama)
+    @Bind(R.id.textview_detail_objek_wisata_nama)
     TextView textViewNama;
-    @Bind(R.id.textview_detail_akomodasi_alamat)
+    @Bind(R.id.textview_detail_objek_wisata_alamat)
     TextView textViewAlamat;
-    @Bind(R.id.textview_detail_akomodasi_telp)
-    TextView textViewTelp;
-    @Bind(R.id.textview_detail_akomodasi_email)
-    TextView textViewEmail;
-    @Bind(R.id.textview_detail_akomodasi_fasilitas)
-    TextView textViewFasilitas;
-    @Bind(R.id.textview_detail_akomodasi_kamar)
-    TextView textViewKamar;
-    @Bind(R.id.textview_detail_akomodasi_pemilik)
-    TextView textViewPemilik;
-    @Bind(R.id.textview_detail_akomodasi_tempat_tidur)
-    TextView textViewTempTidur;
-    @Bind(R.id.textview_detail_akomodasi_tarif)
-    TextView textViewTempTarif;
-    @Bind(R.id.button_detail_akomodasi)
+    @Bind(R.id.textview_detail_objek_wisata_deskripsi)
+    TextView textViewDeskripsi;
+    @Bind(R.id.button_detail_objek_wisata)
     Button button;
 
     // vars
     DetailModel mModel;
-    DetailAkomodasiPresenter mPresenter;
+    DetailObjekWisataPresenter mPresenter;
     Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_akomodasi);
-        intent = DetailAkomodasiActivity.this.getIntent();
+        setContentView(R.layout.activity_detail_objek_wisata);
+        intent = DetailObjekWisataActivity.this.getIntent();
 
         init();
 
@@ -76,23 +65,23 @@ public class DetailAkomodasiActivity extends AppCompatActivity implements Detail
     }
 
     private void parseBundleExtra(Intent intent) {
-        doRetrieveModel().setAkomodasiModel((AkomodasiModel) intent.getSerializableExtra("item"));
+        doRetrieveModel().setObjekWisataModel((ObjekWisataModel) intent.getSerializableExtra("item"));
     }
 
     private void init() {
         ButterKnife.bind(this);
-        this.progressDialog = new ProgressDialog(DetailAkomodasiActivity.this);
+        this.progressDialog = new ProgressDialog(DetailObjekWisataActivity.this);
         progressDialog.setMessage(getString(R.string.message_loading));
         progressDialog.setCancelable(false);
 
         this.mModel = new DetailModel();
-        this.mPresenter = new DetailAkomodasiPresenterImpl(this);
+        this.mPresenter = new DetailObjekWisataPresenterImpl(this);
 
         initLayout();
     }
 
     private void initLayout() {
-        initToolbar(DetailAkomodasiActivity.this, toolbar);
+        initToolbar(DetailObjekWisataActivity.this, toolbar);
     }
 
     private void initToolbar(AppCompatActivity appCompatActivity, Toolbar toolbar) {
@@ -106,7 +95,7 @@ public class DetailAkomodasiActivity extends AppCompatActivity implements Detail
         }
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Detail Akomodasi");
+        actionBar.setTitle("Detail Objek Wisata");
     }
 
     @Override
@@ -122,16 +111,11 @@ public class DetailAkomodasiActivity extends AppCompatActivity implements Detail
     }
 
     public void showDetails() {
-        textViewNama.setText(doRetrieveModel().getAkomodasiModel().getNama());
-        textViewAlamat.setText(doRetrieveModel().getAkomodasiModel().getAlamat());
-        textViewEmail.setText(doRetrieveModel().getAkomodasiModel().getEmail());
-        textViewFasilitas.setText(doRetrieveModel().getAkomodasiModel().getFasilitas());
-        textViewPemilik.setText(doRetrieveModel().getAkomodasiModel().getNamaPemilik());
-        textViewKamar.setText(doRetrieveModel().getAkomodasiModel().getJmlKamar());
-        textViewTempTidur.setText(doRetrieveModel().getAkomodasiModel().getJmlTempatTidur());
-        textViewTempTarif.setText(doRetrieveModel().getAkomodasiModel().getTarif());
-        Picasso.with(DetailAkomodasiActivity.this)
-                .load(doRetrieveModel().getAkomodasiModel().getFotoUrl())
+        textViewNama.setText(doRetrieveModel().getObjekWisataModel().getNama());
+        textViewAlamat.setText(doRetrieveModel().getObjekWisataModel().getAlamat());
+        textViewDeskripsi.setText(doRetrieveModel().getObjekWisataModel().getDeskripsi());
+        Picasso.with(DetailObjekWisataActivity.this)
+                .load(doRetrieveModel().getObjekWisataModel().getFotoUrl())
                 .placeholder(R.drawable.ic_empty)
                 .error(R.drawable.ic_empty)
                 .into(imageView);
@@ -163,17 +147,17 @@ public class DetailAkomodasiActivity extends AppCompatActivity implements Detail
 
     @Override
     public void showError() {
-        Context con = DetailAkomodasiActivity.this;
+        Context con = DetailObjekWisataActivity.this;
         if (con != null) {
             new Handler().post(new Runnable() {
                 public void run() {
-                    new MaterialDialog.Builder(DetailAkomodasiActivity.this)
+                    new MaterialDialog.Builder(DetailObjekWisataActivity.this)
                             .content(R.string.error_general_title)
                             .positiveText(R.string.error_general_content)
                             .onPositive(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
-                                    DetailAkomodasiActivity.this.finish();
+                                    DetailObjekWisataActivity.this.finish();
                                 }
                             })
                             .autoDismiss(false)
@@ -198,9 +182,9 @@ public class DetailAkomodasiActivity extends AppCompatActivity implements Detail
 
     }
 
-    @OnClick(R.id.button_detail_akomodasi)
+    @OnClick(R.id.button_detail_objek_wisata)
     public void onClickMaps() {
-        String uri = String.format(Locale.ENGLISH, "geo:%f,%f", doRetrieveModel().getAkomodasiModel().getLatitude(), doRetrieveModel().getAkomodasiModel().getLongitude());
+        String uri = String.format(Locale.ENGLISH, "geo:%f,%f", doRetrieveModel().getObjekWisataModel().getLatitude(), doRetrieveModel().getObjekWisataModel().getLongitude());
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         startActivity(intent);
     }

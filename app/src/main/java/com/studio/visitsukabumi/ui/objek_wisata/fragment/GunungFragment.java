@@ -1,5 +1,4 @@
-package com.studio.visitsukabumi.ui.akomodasi.fragment;
-
+package com.studio.visitsukabumi.ui.objek_wisata.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,11 +13,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.studio.visitsukabumi.R;
-import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiModel;
-import com.studio.visitsukabumi.presentation.presenters.AkomodasiPresenter;
-import com.studio.visitsukabumi.ui.akomodasi.AkomodasiActivity;
-import com.studio.visitsukabumi.ui.akomodasi.adapter.GridAdapter;
+import com.studio.visitsukabumi.api.v1.objekwisata.ObjekWisataModel;
+import com.studio.visitsukabumi.presentation.presenters.ObjekWisataPresenter;
 import com.studio.visitsukabumi.ui.akomodasi.detail.DetailAkomodasiActivity;
+import com.studio.visitsukabumi.ui.objek_wisata.ObjekWisataActivity;
+import com.studio.visitsukabumi.ui.objek_wisata.adapter.GridAdapter;
+import com.studio.visitsukabumi.ui.objek_wisata.detail.DetailObjekWisataActivity;
 import com.studio.visitsukabumi.utils.commons.RecyclerItemClickListener;
 
 import java.util.List;
@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HotelNonBintangFragment extends Fragment {
+public class GunungFragment extends Fragment {
     // views
     @Bind(R.id.recyclerview_menu_grid)
     RecyclerView recyclerView;
@@ -39,10 +39,9 @@ public class HotelNonBintangFragment extends Fragment {
     TextView textView;
     ProgressDialog progressDialog;
 
-    // vars
-    List<AkomodasiModel> mListItem;
+    List<ObjekWisataModel> listItems;
 
-    public HotelNonBintangFragment() {
+    public GunungFragment() {
         // Required empty public constructor
     }
 
@@ -64,14 +63,14 @@ public class HotelNonBintangFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                AkomodasiModel item = mListItem.get(position);
+                ObjekWisataModel item = listItems.get(position);
                 openDetails(item);
             }
         }));
     }
 
     private void init(View view) {
-        this.mListItem = ((AkomodasiActivity) getActivity()).doRetrieveModel().getListAkomodasiModelNonBintang();
+        this.listItems = ((ObjekWisataActivity) getActivity()).doRetrieveModel().getListObjekGunung();
         initLayout(view);
     }
 
@@ -85,25 +84,25 @@ public class HotelNonBintangFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        recyclerView.setAdapter(new GridAdapter(getActivity(), mListItem));
+        recyclerView.setAdapter(new GridAdapter(getActivity(), listItems));
     }
 
     public void showItems() {
-        if (mListItem.isEmpty())
-            showScreenState(AkomodasiPresenter.AkomodasiView.ScreenState.SCREEN_BLANK);
+        if (listItems.isEmpty())
+            showScreenState(ObjekWisataPresenter.ObjekWisataView.ScreenState.SCREEN_BLANK);
         else {
             recyclerView.getAdapter().notifyDataSetChanged();
-            showScreenState(AkomodasiPresenter.AkomodasiView.ScreenState.SCREEN_NOT_BLANK);
+            showScreenState(ObjekWisataPresenter.ObjekWisataView.ScreenState.SCREEN_NOT_BLANK);
         }
     }
 
-    private void openDetails(AkomodasiModel item) {
-        Intent intent = new Intent(getActivity(), DetailAkomodasiActivity.class);
+    private void openDetails(ObjekWisataModel item) {
+        Intent intent = new Intent(getActivity(), DetailObjekWisataActivity.class);
         intent.putExtra("item", item);
         startActivity(intent);
     }
 
-    private void showScreenState(AkomodasiPresenter.AkomodasiView.ScreenState screenState) {
+    private void showScreenState(ObjekWisataPresenter.ObjekWisataView.ScreenState screenState) {
         switch (screenState) {
             case SCREEN_BLANK:
                 textView.setVisibility(View.VISIBLE);

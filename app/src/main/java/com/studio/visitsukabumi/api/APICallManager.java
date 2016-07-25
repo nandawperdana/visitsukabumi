@@ -1,9 +1,16 @@
 package com.studio.visitsukabumi.api;
 
 import com.studio.visitsukabumi.BuildConfig;
+import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiModel;
+import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiService;
+import com.studio.visitsukabumi.api.v1.objekwisata.ObjekWisataService;
+import com.studio.visitsukabumi.api.v1.unggulan.UnggulanModel;
+import com.studio.visitsukabumi.api.v1.unggulan.UnggulanService;
 import com.studio.visitsukabumi.api.v1.user.UserService;
 import com.studio.visitsukabumi.api.v1.user.UsersModel;
 import com.studio.visitsukabumi.utils.commons.Constants;
+
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
@@ -24,6 +31,9 @@ public class APICallManager {
     private String authorizationKey;
 
     public UserManager userManager;
+    public UnggulanManager unggulanManager;
+    public AkomodasiManager akomodasiManager;
+    public ObjekWisataManager objekWisataManager;
 
     /**
      * singleton class instance
@@ -61,6 +71,9 @@ public class APICallManager {
 
         // registering API endpoint manager
         this.userManager = new UserManager();
+        this.unggulanManager = new UnggulanManager();
+        this.akomodasiManager = new AkomodasiManager();
+        this.objekWisataManager = new ObjekWisataManager();
     }
 
     public static <T> T getService(Class<T> serviceClass) {
@@ -117,6 +130,42 @@ public class APICallManager {
         public Call<UsersModel> editUserGCMId(String snsRegistrationId) {
             UserService userService = getService(UserService.class);
             return userService.putUsersSNSRegistrationId(getAuthorizationKey(), snsRegistrationId);
+        }
+    }
+
+    public class AkomodasiManager {
+        public Call<List<AkomodasiModel>> getAll() {
+            AkomodasiService service = getService(AkomodasiService.class);
+            return service.getAll();
+        }
+
+        public Call<AkomodasiModel> getById(String id) {
+            AkomodasiService service = getService(AkomodasiService.class);
+            return service.getById(id);
+        }
+    }
+
+    public class UnggulanManager {
+        public Call<List<UnggulanModel>> getAll() {
+            UnggulanService service = getService(UnggulanService.class);
+            return service.getAll();
+        }
+
+        public Call<List<UnggulanModel>> getById(String id) {
+            UnggulanService service = getService(UnggulanService.class);
+            return service.getById(id);
+        }
+    }
+
+    public class ObjekWisataManager {
+        public Call<List<com.studio.visitsukabumi.api.v1.objekwisata.ObjekWisataModel>> getAll() {
+            ObjekWisataService service = getService(ObjekWisataService.class);
+            return service.getAll();
+        }
+
+        public Call<List<com.studio.visitsukabumi.api.v1.objekwisata.ObjekWisataModel>> getById(String id) {
+            ObjekWisataService service = getService(ObjekWisataService.class);
+            return service.getById(id);
         }
     }
 }

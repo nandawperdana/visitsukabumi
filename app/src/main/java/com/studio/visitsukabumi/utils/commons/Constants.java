@@ -5,8 +5,8 @@ package com.studio.visitsukabumi.utils.commons;
  */
 public final class Constants {
     public class Paths {
-        public static final String ENDPOINT_RELEASE = "http://10.10.1.116/kartu-imunisasi-api/public/api/v1/";
-        public static final String ENDPOINT_STAGING = "http://10.10.1.116/kartu-imunisasi-api/public/api/v1/";
+        public static final String ENDPOINT_RELEASE = "http://visitsukabumi.hol.es/api/";
+        public static final String ENDPOINT_STAGING = "http://visitsukabumi.hol.es/api/";
     }
 
     public class Keys {

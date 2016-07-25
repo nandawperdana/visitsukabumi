@@ -12,7 +12,7 @@ public interface AkomodasiPresenter extends BasePresenter {
         enum ViewState {
             IDLE, LOADING,
             LOAD_HOTEL_BINTANG, SHOW_HOTEL_BINTANG, LOAD_HOTEL_NONBINTANG, SHOW_HOTEL_NONBINTANG,
-            OPEN_MENU, OPEN_DETAIL, ERROR
+            OPEN_MENU, OPEN_DETAIL, LOAD_AKOMODASI, SHOW_ITEMS, SHOW_PONDOK, LOAD_PONDOK, ERROR
         }
 
         enum ScreenState {

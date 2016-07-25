@@ -1,6 +1,5 @@
 package com.studio.visitsukabumi.ui.akomodasi.fragment;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +29,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HotelNonBintangFragment extends Fragment {
+public class PondokFragment extends Fragment {
     // views
     @Bind(R.id.recyclerview_menu_grid)
     RecyclerView recyclerView;
@@ -39,10 +38,9 @@ public class HotelNonBintangFragment extends Fragment {
     TextView textView;
     ProgressDialog progressDialog;
 
-    // vars
-    List<AkomodasiModel> mListItem;
+    List<AkomodasiModel> listItems;
 
-    public HotelNonBintangFragment() {
+    public PondokFragment() {
         // Required empty public constructor
     }
 
@@ -64,14 +62,14 @@ public class HotelNonBintangFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                AkomodasiModel item = mListItem.get(position);
+                AkomodasiModel item = listItems.get(position);
                 openDetails(item);
             }
         }));
     }
 
     private void init(View view) {
-        this.mListItem = ((AkomodasiActivity) getActivity()).doRetrieveModel().getListAkomodasiModelNonBintang();
+        this.listItems = ((AkomodasiActivity) getActivity()).doRetrieveModel().getListAkomodasiModelPondok();
         initLayout(view);
     }
 
@@ -85,11 +83,11 @@ public class HotelNonBintangFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        recyclerView.setAdapter(new GridAdapter(getActivity(), mListItem));
+        recyclerView.setAdapter(new GridAdapter(getActivity(), listItems));
     }
 
     public void showItems() {
-        if (mListItem.isEmpty())
+        if (listItems.isEmpty())
             showScreenState(AkomodasiPresenter.AkomodasiView.ScreenState.SCREEN_BLANK);
         else {
             recyclerView.getAdapter().notifyDataSetChanged();

@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/toolbar_fade_to_primary"
+            android:elevation="8dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             android:titleTextColor="@color/white"
             app:layout_collapseMode="pin"
@@ -39,66 +40,27 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageview_dashboard_backdrop"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager_dashboard"
+                android:background="@color/white_75"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_empty"
-                app:layout_collapseMode="parallax" />
+                android:layout_height="match_parent" />
 
-            <LinearLayout
+            <com.viewpagerindicator.CirclePageIndicator
+                android:id="@+id/indicator_dashboard"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_alignBottom="@+id/imageview_dashboard_backdrop"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:background="@color/black_50"
-                android:orientation="vertical">
+                android:gravity="bottom"
+                app:centered="true"
+                app:fillColor="@color/colorPrimary"
+                app:pageColor="@color/white_75"
+                app:strokeColor="#00635F65" />
 
-                <TextView
-                    android:id="@+id/textview_dashboard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="7 Objek Wisata Unggulan"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_extra_large"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Objek Wisata "
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_large"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <!--<android.support.v4.view.ViewPager-->
-            <!--android:id="@+id/viewpager_dashboard"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="@color/white"-->
-            <!--android:drawable="@color/colorPrimary"-->
-            <!--android:visibility="visible">-->
-
-            <!--</android.support.v4.view.ViewPager>-->
-
-            <!--<com.viewpagerindicator.CirclePageIndicator-->
-            <!--android:id="@+id/indicator_dashboard"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_weight="1"-->
-            <!--app:fillColor="@color/colorPrimary"-->
-            <!--app:pageColor="#635F65"-->
-            <!--app:strokeColor="#00635F65" />-->
         </RelativeLayout>
 
         <!--</android.support.design.widget.CollapsingToolbarLayout>-->

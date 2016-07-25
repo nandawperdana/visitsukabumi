@@ -1,4 +1,4 @@
-package com.studio.visitsukabumi.ui.akomodasi.adapter;
+package com.studio.visitsukabumi.ui.objek_wisata.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,9 +11,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.studio.visitsukabumi.R;
-import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiModel;
+import com.studio.visitsukabumi.api.v1.objekwisata.ObjekWisataModel;
 
 import java.util.List;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,10 +24,10 @@ import butterknife.ButterKnife;
  */
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     private Context mContext;
-    private List<AkomodasiModel> mListItem;
+    private List<ObjekWisataModel> mListItem;
 
     // Constructor
-    public GridAdapter(Context c, List<AkomodasiModel> itemlist) {
+    public GridAdapter(Context c, List<ObjekWisataModel> itemlist) {
         this.mContext = c;
         this.mListItem = itemlist;
     }
@@ -48,7 +49,15 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
                 .placeholder(R.drawable.ic_akomodasi)
                 .error(R.drawable.ic_akomodasi)
                 .into(holder.imageView);
-        holder.ratingBar.setRating(Float.parseFloat(mListItem.get(position).getBintang()));
+
+        float minX = 0.0f;
+        float maxX = 5.0f;
+
+        Random rand = new Random();
+
+        float finalX = rand.nextFloat() * (maxX - minX) + minX;
+
+        holder.ratingBar.setRating(finalX);
     }
 
     @Override

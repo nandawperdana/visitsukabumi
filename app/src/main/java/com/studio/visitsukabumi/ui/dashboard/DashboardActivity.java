@@ -7,26 +7,28 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.squareup.picasso.Picasso;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.presentation.presenters.DashboardPresenter;
 import com.studio.visitsukabumi.ui.akomodasi.AkomodasiActivity;
 import com.studio.visitsukabumi.ui.dashboard.adapter.DashboardAdapter;
+import com.studio.visitsukabumi.ui.dashboard.adapter.UnggulanSliderAdapter;
 import com.studio.visitsukabumi.ui.dashboard.mvp.DashboardModel;
 import com.studio.visitsukabumi.ui.dashboard.mvp.DashboardPresenterImpl;
+import com.studio.visitsukabumi.ui.objek_wisata.ObjekWisataActivity;
 import com.studio.visitsukabumi.utils.commons.Enums;
 import com.studio.visitsukabumi.utils.commons.RecyclerItemClickListener;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,17 +45,13 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
     CoordinatorLayout coordinatorLayout;
     @Bind(R.id.appbar_dashboard)
     AppBarLayout appBarLayout;
-    //    @Bind(R.id.viewpager_dashboard)
-//    ViewPager viewPager;
-//    @Bind(R.id.indicator_dashboard)
-//    CirclePageIndicator circlePageIndicator;
-//    @Bind(R.id.gridview_dashboard)
-//    GridView gridView;
+    @Bind(R.id.viewpager_dashboard)
+    ViewPager viewPager;
+    @Bind(R.id.indicator_dashboard)
+    CirclePageIndicator circlePageIndicator;
     @Bind(R.id.recyclerview_dashboard)
     RecyclerView recyclerView;
     GridLayoutManager gridLayoutManager;
-    @Bind(R.id.imageview_dashboard_backdrop)
-    ImageView imageView;
 
     // vars
     DashboardModel mModel;
@@ -67,6 +65,9 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
 
         init();
 
+        // get unggulan items
+        mPresenter.presentState(ViewState.LOAD_UNGGULAN);
+
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(DashboardActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -76,18 +77,9 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
             }
         }));
 
-//        gridView.setOnItemClickListener(new GridView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                DashboardModel.Menu menu = mListMenu.get(position);
-//                doRetrieveModel().setMenu(menu.getId());
-//                mPresenter.presentState(ViewState.OPEN_MENU);
-//            }
-//        });
     }
 
     private void init() {
-
         initLayout();
     }
 
@@ -108,12 +100,15 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
         recyclerView.setLayoutManager(gridLayoutManager);
 
         recyclerView.setAdapter(new DashboardAdapter(DashboardActivity.this, mListMenu));
-//        gridView.setAdapter(new DashboardAdapter(this, mListMenu));
-        Picasso.with(DashboardActivity.this)
-                .load("https://sukabumionline.files.wordpress.com/2011/10/sukabumi-dalam-bingkai.jpg")
-                .placeholder(R.drawable.ic_empty)
-                .error(R.drawable.ic_empty)
-                .into(imageView);
+
+        viewPager.setAdapter(new UnggulanSliderAdapter(DashboardActivity.this, doRetrieveModel().getListUnggulanModel()));
+        viewPager.setClipToPadding(false);
+        viewPager.setClipChildren(false);
+        viewPager.setHorizontalFadingEdgeEnabled(true);
+        viewPager.setFadingEdgeLength(10);
+        viewPager.setPageMargin(-20);
+
+        circlePageIndicator.setViewPager(viewPager);
     }
 
     private void initToolbar(AppCompatActivity appCompatActivity, Toolbar toolbar) {
@@ -144,8 +139,6 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.PELAYANAN_PUBLIK, "Pelayanan Publik", R.drawable.ic_pelayanan_publik));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.EVENT, "Event", R.drawable.ic_event));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.AKTIVITAS, "Aktifitas", R.drawable.ic_aktivitas));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.TIPS, "Tips Berwisata", R.drawable.ic_pelayanan_publik));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.PROFIL, "Profil", R.drawable.ic_objek_wisata));
     }
 
     @Override
@@ -157,13 +150,28 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
             case LOADING:
                 showProgress(true);
                 break;
+            case SHOW_UNGGULAN:
+                showUnggulanItems();
+                mPresenter.presentState(ViewState.IDLE);
+                break;
             case OPEN_MENU:
                 openMenu(doRetrieveModel().getMenu());
+                break;
+            case OPEN_UNGGULAN_DETAILS:
+                openUnggulanDetails();
                 break;
             case ERROR:
                 showError();
                 break;
         }
+    }
+
+    private void openUnggulanDetails() {
+
+    }
+
+    private void showUnggulanItems() {
+        viewPager.getAdapter().notifyDataSetChanged();
     }
 
     @Override
@@ -212,7 +220,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
     private void openMenu(Enums.Menu menu) {
         switch (menu) {
             case OBJEK_WISATA:
-                openActivity(AkomodasiActivity.class);
+                openActivity(ObjekWisataActivity.class);
                 break;
             case AKOMODASI:
                 openActivity(AkomodasiActivity.class);

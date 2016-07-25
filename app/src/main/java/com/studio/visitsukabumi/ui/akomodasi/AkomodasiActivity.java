@@ -5,20 +5,24 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.studio.visitsukabumi.R;
+import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiModel;
 import com.studio.visitsukabumi.presentation.presenters.AkomodasiPresenter;
 import com.studio.visitsukabumi.ui.akomodasi.adapter.ViewPagerAdapter;
 import com.studio.visitsukabumi.ui.akomodasi.fragment.HotelBintangFragment;
 import com.studio.visitsukabumi.ui.akomodasi.fragment.HotelNonBintangFragment;
-import com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiModel;
+import com.studio.visitsukabumi.ui.akomodasi.fragment.PondokFragment;
 import com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiPresenterImpl;
 
 import butterknife.Bind;
@@ -35,7 +39,7 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
     ViewPager viewPager;
 
     // vars
-    AkomodasiModel mModel;
+    com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiModel mModel;
     AkomodasiPresenter mPresenter;
 
     @Override
@@ -44,6 +48,8 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
         setContentView(R.layout.activity_akomodasi);
 
         init();
+
+        mPresenter.presentState(ViewState.LOAD_AKOMODASI);
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -57,10 +63,13 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
                 doRetrieveModel().setFragmentSelected(position);
                 switch (position) {
                     case 0:
-                        mPresenter.presentState(ViewState.LOADING);
+                        mPresenter.presentState(ViewState.LOAD_HOTEL_BINTANG);
                         break;
                     case 1:
-                        mPresenter.presentState(ViewState.LOADING);
+                        mPresenter.presentState(ViewState.LOAD_HOTEL_NONBINTANG);
+                        break;
+                    case 2:
+                        mPresenter.presentState(ViewState.LOAD_PONDOK);
                         break;
                 }
             }
@@ -78,7 +87,7 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
         mProgressDialog.setMessage(getString(R.string.message_loading));
         mProgressDialog.setCancelable(false);
 
-        this.mModel = new AkomodasiModel();
+        this.mModel = new com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiModel();
         this.mPresenter = new AkomodasiPresenterImpl(this);
 
         initLayout();
@@ -108,6 +117,7 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new HotelBintangFragment(), "Hotel Bintang");
         viewPagerAdapter.addFragment(new HotelNonBintangFragment(), "Hotel Non Bintang");
+        viewPagerAdapter.addFragment(new PondokFragment(), "Pondok");
 
         if (viewPager == null || tabLayout == null) {
             return;
@@ -123,6 +133,37 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
     }
 
     @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        try {
+            if (fragment instanceof HotelBintangFragment) {
+                doRetrieveModel().setHotelBintangFragment((HotelBintangFragment) fragment);
+            }
+            if (fragment instanceof HotelNonBintangFragment) {
+                doRetrieveModel().setHotelNonBintangFragment((HotelNonBintangFragment) fragment);
+            }
+            if (fragment instanceof PondokFragment) {
+                doRetrieveModel().setPondokFragment((PondokFragment) fragment);
+            }
+            Log.i("AttachFragment", "fragment " + fragment.toString());
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void showState(ViewState state) {
         switch (state) {
             case IDLE:
@@ -132,12 +173,16 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
                 showProgress(true);
                 break;
             case SHOW_HOTEL_BINTANG:
-                doRetrieveModel().getHotelBintangFragment().showItems();
+                showHotelBintangItems();
                 break;
             case SHOW_HOTEL_NONBINTANG:
-                doRetrieveModel().getHotelNonBintangFragment().showItems();
+                showHotelNonBintangItems();
                 break;
-            case OPEN_MENU:
+            case SHOW_PONDOK:
+                showPondokItems();
+                break;
+            case SHOW_ITEMS:
+                showItems();
                 break;
             case ERROR:
                 showError();
@@ -145,8 +190,58 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
         }
     }
 
+    private void showItems() {
+        switch (this.viewPager.getCurrentItem()) {
+            case 1:
+                mPresenter.presentState(ViewState.LOAD_HOTEL_BINTANG);
+                break;
+            case 2:
+                mPresenter.presentState(ViewState.LOAD_HOTEL_NONBINTANG);
+                break;
+            case 3:
+                mPresenter.presentState(ViewState.LOAD_PONDOK);
+                break;
+            default:
+                mPresenter.presentState(ViewState.LOAD_HOTEL_BINTANG);
+                break;
+        }
+    }
+
+    private void showPondokItems() {
+        doRetrieveModel().getListAkomodasiModelPondok().clear();
+        for (AkomodasiModel item : doRetrieveModel().getListAkomodasiModel()) {
+            if (item.getJenis().equals(com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiModel.TAG_PONDOK)) {
+                doRetrieveModel().getListAkomodasiModelPondok().add(item);
+            }
+        }
+        doRetrieveModel().getPondokFragment().showItems();
+        mPresenter.presentState(ViewState.IDLE);
+    }
+
+    private void showHotelNonBintangItems() {
+        doRetrieveModel().getListAkomodasiModelNonBintang().clear();
+        for (AkomodasiModel item : doRetrieveModel().getListAkomodasiModel()) {
+            if (item.getJenis().equals(com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiModel.TAG_HOTEL_NON_BINTANG)) {
+                doRetrieveModel().getListAkomodasiModelNonBintang().add(item);
+            }
+        }
+        doRetrieveModel().getHotelNonBintangFragment().showItems();
+        mPresenter.presentState(ViewState.IDLE);
+    }
+
+    private void showHotelBintangItems() {
+        doRetrieveModel().getListAkomodasiModelBintang().clear();
+        for (AkomodasiModel item : doRetrieveModel().getListAkomodasiModel()) {
+            if (item.getJenis().equals(com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiModel.TAG_HOTEL_BINTANG)) {
+                doRetrieveModel().getListAkomodasiModelBintang().add(item);
+            }
+        }
+        doRetrieveModel().getHotelBintangFragment().showItems();
+        mPresenter.presentState(ViewState.IDLE);
+    }
+
     @Override
-    public AkomodasiModel doRetrieveModel() {
+    public com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiModel doRetrieveModel() {
         return this.mModel;
     }
 

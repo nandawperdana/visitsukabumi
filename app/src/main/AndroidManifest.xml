@@ -23,15 +23,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.dashboard.DashboardActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DashboardTheme" />
+
         <activity android:name=".ui.akomodasi.AkomodasiActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.dashboard.DashboardActivity" />
         </activity>
+
         <activity
             android:name=".ui.akomodasi.detail.DetailAkomodasiActivity"
             android:screenOrientation="portrait">
@@ -39,7 +42,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.akomodasi.AkomodasiActivity" />
         </activity>
-        <activity android:name=".ui.objek_wisata.ObjekWisataActivity"></activity>
+
+        <activity
+            android:name=".ui.objek_wisata.detail.DetailObjekWisataActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.objek_wisata.ObjekWisataActivity" />
+        </activity>
+
+        <activity android:name=".ui.objek_wisata.ObjekWisataActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.dashboard.DashboardActivity" />
+        </activity>
     </application>
 
 </manifest>

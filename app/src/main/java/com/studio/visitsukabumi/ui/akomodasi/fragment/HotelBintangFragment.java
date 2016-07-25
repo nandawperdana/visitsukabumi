@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.studio.visitsukabumi.R;
+import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiModel;
 import com.studio.visitsukabumi.presentation.presenters.AkomodasiPresenter;
+import com.studio.visitsukabumi.ui.akomodasi.AkomodasiActivity;
 import com.studio.visitsukabumi.ui.akomodasi.adapter.GridAdapter;
 import com.studio.visitsukabumi.ui.akomodasi.detail.DetailAkomodasiActivity;
-import com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiModel;
 import com.studio.visitsukabumi.utils.commons.RecyclerItemClickListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -38,8 +38,7 @@ public class HotelBintangFragment extends Fragment {
     TextView textView;
     ProgressDialog progressDialog;
 
-    // vars
-    List<AkomodasiModel.ItemModel> mListItem;
+    List<AkomodasiModel> listItems;
 
     public HotelBintangFragment() {
         // Required empty public constructor
@@ -63,21 +62,14 @@ public class HotelBintangFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                AkomodasiModel.ItemModel item = mListItem.get(position);
+                AkomodasiModel item = listItems.get(position);
                 openDetails(item);
             }
         }));
-//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                AkomodasiModel.ItemModel item = mListItem.get(position);
-//                openDetails(item);
-//            }
-//        });
     }
 
     private void init(View view) {
-        setDummyItem();
+        this.listItems = ((AkomodasiActivity) getActivity()).doRetrieveModel().getListAkomodasiModelBintang();
         initLayout(view);
     }
 
@@ -91,26 +83,19 @@ public class HotelBintangFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        recyclerView.setAdapter(new GridAdapter(getActivity(), mListItem));
-//        gridView.setAdapter(new GridAdapter(getActivity(), mListItem));
-    }
-
-    private void setDummyItem() {
-        this.mListItem = new ArrayList<>();
-
-        mListItem.add(new AkomodasiModel.ItemModel("Inna Samudera", 4.5F, "https://pix6.agoda.net/hotelimages/569/569229/569229_15102712260037199188.jpg?s=312x235"));
-        mListItem.add(new AkomodasiModel.ItemModel("Resort Pangrango", 3.5F, "https://pix6.agoda.net/hotelimages/267/267626/267626_15061714400029774906.jpg?s=312x235"));
-        mListItem.add(new AkomodasiModel.ItemModel("Sulabintana Resort", 4.0F, "http://images2.travbuddy.com/hotel_21365777.jpg"));
+        recyclerView.setAdapter(new GridAdapter(getActivity(), listItems));
     }
 
     public void showItems() {
-        if (mListItem.isEmpty())
+        if (listItems.isEmpty())
             showScreenState(AkomodasiPresenter.AkomodasiView.ScreenState.SCREEN_BLANK);
-        else
+        else {
+            recyclerView.getAdapter().notifyDataSetChanged();
             showScreenState(AkomodasiPresenter.AkomodasiView.ScreenState.SCREEN_NOT_BLANK);
+        }
     }
 
-    private void openDetails(AkomodasiModel.ItemModel item) {
+    private void openDetails(AkomodasiModel item) {
         Intent intent = new Intent(getActivity(), DetailAkomodasiActivity.class);
         intent.putExtra("item", item);
         startActivity(intent);
