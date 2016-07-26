@@ -16,13 +16,13 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.presentation.presenters.ObjekWisataPresenter;
-import com.studio.visitsukabumi.ui.objek_wisata.adapter.ViewPagerAdapter;
 import com.studio.visitsukabumi.ui.objek_wisata.fragment.GunungFragment;
 import com.studio.visitsukabumi.ui.objek_wisata.fragment.LautPantaiFragment;
 import com.studio.visitsukabumi.ui.objek_wisata.fragment.RimbaFragment;
 import com.studio.visitsukabumi.ui.objek_wisata.fragment.SungaiFragment;
 import com.studio.visitsukabumi.ui.objek_wisata.mvp.ObjekWisataModel;
 import com.studio.visitsukabumi.ui.objek_wisata.mvp.ObjekWisataPresenterImpl;
+import com.studio.visitsukabumi.ui.transportasi.adapter.ViewPagerAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

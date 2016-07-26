@@ -2,6 +2,7 @@ package com.studio.visitsukabumi.ui.dashboard.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.api.v1.unggulan.UnggulanModel;
+import com.studio.visitsukabumi.ui.unggulan.UnggulanActivity;
 
 import java.util.List;
 
@@ -44,11 +46,20 @@ public class UnggulanSliderAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup viewGroup, int position) {
+    public Object instantiateItem(ViewGroup viewGroup, final int position) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.view_pager_dashboard_slider, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, UnggulanActivity.class);
+                intent.putExtra("unggulan", listUnggulanModel.get(position));
+                context.startActivity(intent);
+            }
+        });
 
         Picasso.with(context)
                 .load(listUnggulanModel.get(position).getFotoUrl())
@@ -76,7 +87,7 @@ public class UnggulanSliderAdapter extends PagerAdapter {
         return null;
     }
 
-    static class ViewHolder {
+    class ViewHolder {
         @Bind(R.id.imageview_dashboard)
         ImageView image;
         @Bind(R.id.textview_dashboard_title)

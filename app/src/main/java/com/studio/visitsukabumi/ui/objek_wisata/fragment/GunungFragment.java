@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.api.v1.objekwisata.ObjekWisataModel;
 import com.studio.visitsukabumi.presentation.presenters.ObjekWisataPresenter;
-import com.studio.visitsukabumi.ui.akomodasi.detail.DetailAkomodasiActivity;
 import com.studio.visitsukabumi.ui.objek_wisata.ObjekWisataActivity;
 import com.studio.visitsukabumi.ui.objek_wisata.adapter.GridAdapter;
 import com.studio.visitsukabumi.ui.objek_wisata.detail.DetailObjekWisataActivity;
@@ -106,12 +105,10 @@ public class GunungFragment extends Fragment {
         switch (screenState) {
             case SCREEN_BLANK:
                 textView.setVisibility(View.VISIBLE);
-//                gridView.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 break;
             case SCREEN_NOT_BLANK:
                 textView.setVisibility(View.GONE);
-//                gridView.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.VISIBLE);
                 break;
         }

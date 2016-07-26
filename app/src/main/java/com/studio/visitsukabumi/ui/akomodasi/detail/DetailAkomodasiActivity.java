@@ -200,7 +200,8 @@ public class DetailAkomodasiActivity extends AppCompatActivity implements Detail
 
     @OnClick(R.id.button_detail_akomodasi)
     public void onClickMaps() {
-        String uri = String.format(Locale.ENGLISH, "geo:%f,%f", doRetrieveModel().getAkomodasiModel().getLatitude(), doRetrieveModel().getAkomodasiModel().getLongitude());
+        String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Float.parseFloat(doRetrieveModel().getAkomodasiModel().getLatitude()),
+                Float.parseFloat(doRetrieveModel().getAkomodasiModel().getLongitude()));
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         startActivity(intent);
     }

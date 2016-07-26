@@ -1,4 +1,4 @@
-package com.studio.visitsukabumi.ui.objek_wisata.adapter;
+package com.studio.visitsukabumi.utils.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

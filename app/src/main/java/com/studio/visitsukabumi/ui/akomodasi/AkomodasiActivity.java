@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -19,11 +18,11 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiModel;
 import com.studio.visitsukabumi.presentation.presenters.AkomodasiPresenter;
-import com.studio.visitsukabumi.ui.akomodasi.adapter.ViewPagerAdapter;
 import com.studio.visitsukabumi.ui.akomodasi.fragment.HotelBintangFragment;
 import com.studio.visitsukabumi.ui.akomodasi.fragment.HotelNonBintangFragment;
 import com.studio.visitsukabumi.ui.akomodasi.fragment.PondokFragment;
 import com.studio.visitsukabumi.ui.akomodasi.mvp.AkomodasiPresenterImpl;
+import com.studio.visitsukabumi.ui.transportasi.adapter.ViewPagerAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -145,7 +144,6 @@ public class AkomodasiActivity extends AppCompatActivity implements AkomodasiPre
             if (fragment instanceof PondokFragment) {
                 doRetrieveModel().setPondokFragment((PondokFragment) fragment);
             }
-            Log.i("AttachFragment", "fragment " + fragment.toString());
         } catch (Exception e) {
 
         }

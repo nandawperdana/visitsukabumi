@@ -3,7 +3,20 @@ package com.studio.visitsukabumi.api;
 import com.studio.visitsukabumi.BuildConfig;
 import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiModel;
 import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiService;
+import com.studio.visitsukabumi.api.v1.aktifitas.AktifitasModel;
+import com.studio.visitsukabumi.api.v1.aktifitas.AktifitasService;
+import com.studio.visitsukabumi.api.v1.belanja.BelanjaModel;
+import com.studio.visitsukabumi.api.v1.belanja.BelanjaService;
+import com.studio.visitsukabumi.api.v1.objekwisata.ObjekWisataModel;
 import com.studio.visitsukabumi.api.v1.objekwisata.ObjekWisataService;
+import com.studio.visitsukabumi.api.v1.pelayananpublik.PelayananPublikModel;
+import com.studio.visitsukabumi.api.v1.pelayananpublik.PelayananPublikService;
+import com.studio.visitsukabumi.api.v1.restoran.RestoranModel;
+import com.studio.visitsukabumi.api.v1.restoran.RestoranService;
+import com.studio.visitsukabumi.api.v1.senibudaya.SeniBudayaModel;
+import com.studio.visitsukabumi.api.v1.senibudaya.SeniBudayaService;
+import com.studio.visitsukabumi.api.v1.transportasi.TransportasiModel;
+import com.studio.visitsukabumi.api.v1.transportasi.TransportasiService;
 import com.studio.visitsukabumi.api.v1.unggulan.UnggulanModel;
 import com.studio.visitsukabumi.api.v1.unggulan.UnggulanService;
 import com.studio.visitsukabumi.api.v1.user.UserService;
@@ -34,6 +47,12 @@ public class APICallManager {
     public UnggulanManager unggulanManager;
     public AkomodasiManager akomodasiManager;
     public ObjekWisataManager objekWisataManager;
+    public TransportasiManager transportasiManager;
+    public SeniBudayaManager seniBudayaManager;
+    public PelayananPublikManager pelayananPublikManager;
+    public RestoranManager restoranManager;
+    public BelanjaManager belanjaManager;
+    public AktifitasManager aktifitasManager;
 
     /**
      * singleton class instance
@@ -74,6 +93,12 @@ public class APICallManager {
         this.unggulanManager = new UnggulanManager();
         this.akomodasiManager = new AkomodasiManager();
         this.objekWisataManager = new ObjekWisataManager();
+        this.transportasiManager = new TransportasiManager();
+        this.seniBudayaManager = new SeniBudayaManager();
+        this.pelayananPublikManager = new PelayananPublikManager();
+        this.restoranManager = new RestoranManager();
+        this.belanjaManager = new BelanjaManager();
+        this.aktifitasManager = new AktifitasManager();
     }
 
     public static <T> T getService(Class<T> serviceClass) {
@@ -158,13 +183,85 @@ public class APICallManager {
     }
 
     public class ObjekWisataManager {
-        public Call<List<com.studio.visitsukabumi.api.v1.objekwisata.ObjekWisataModel>> getAll() {
+        public Call<List<ObjekWisataModel>> getAll() {
             ObjekWisataService service = getService(ObjekWisataService.class);
             return service.getAll();
         }
 
-        public Call<List<com.studio.visitsukabumi.api.v1.objekwisata.ObjekWisataModel>> getById(String id) {
+        public Call<List<ObjekWisataModel>> getById(String id) {
             ObjekWisataService service = getService(ObjekWisataService.class);
+            return service.getById(id);
+        }
+    }
+
+    public class TransportasiManager {
+        public Call<List<TransportasiModel>> getAll() {
+            TransportasiService service = getService(TransportasiService.class);
+            return service.getAll();
+        }
+
+        public Call<List<TransportasiModel>> getById(String id) {
+            TransportasiService service = getService(TransportasiService.class);
+            return service.getById(id);
+        }
+    }
+
+    public class SeniBudayaManager {
+        public Call<List<SeniBudayaModel>> getAll() {
+            SeniBudayaService service = getService(SeniBudayaService.class);
+            return service.getAll();
+        }
+
+        public Call<List<SeniBudayaModel>> getById(String id) {
+            SeniBudayaService service = getService(SeniBudayaService.class);
+            return service.getById(id);
+        }
+    }
+
+    public class PelayananPublikManager {
+        public Call<List<PelayananPublikModel>> getAll() {
+            PelayananPublikService service = getService(PelayananPublikService.class);
+            return service.getAll();
+        }
+
+        public Call<List<PelayananPublikModel>> getById(String id) {
+            PelayananPublikService service = getService(PelayananPublikService.class);
+            return service.getById(id);
+        }
+    }
+
+    public class RestoranManager {
+        public Call<List<RestoranModel>> getAll() {
+            RestoranService service = getService(RestoranService.class);
+            return service.getAll();
+        }
+
+        public Call<List<RestoranModel>> getById(String id) {
+            RestoranService service = getService(RestoranService.class);
+            return service.getById(id);
+        }
+    }
+
+    public class BelanjaManager {
+        public Call<List<BelanjaModel>> getAll() {
+            BelanjaService service = getService(BelanjaService.class);
+            return service.getAll();
+        }
+
+        public Call<List<BelanjaModel>> getById(String id) {
+            BelanjaService service = getService(BelanjaService.class);
+            return service.getById(id);
+        }
+    }
+
+    public class AktifitasManager {
+        public Call<List<AktifitasModel>> getAll() {
+            AktifitasService service = getService(AktifitasService.class);
+            return service.getAll();
+        }
+
+        public Call<List<AktifitasModel>> getById(String id) {
+            AktifitasService service = getService(AktifitasService.class);
             return service.getById(id);
         }
     }

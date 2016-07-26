@@ -10,7 +10,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -184,7 +183,8 @@ public class DetailObjekWisataActivity extends AppCompatActivity implements Deta
 
     @OnClick(R.id.button_detail_objek_wisata)
     public void onClickMaps() {
-        String uri = String.format(Locale.ENGLISH, "geo:%f,%f", doRetrieveModel().getObjekWisataModel().getLatitude(), doRetrieveModel().getObjekWisataModel().getLongitude());
+        String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Float.parseFloat(doRetrieveModel().getObjekWisataModel().getLatitude()),
+                Float.parseFloat(doRetrieveModel().getObjekWisataModel().getLongitude()));
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         startActivity(intent);
     }

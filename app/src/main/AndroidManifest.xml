@@ -23,18 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.dashboard.DashboardActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DashboardTheme" />
-
         <activity android:name=".ui.akomodasi.AkomodasiActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.dashboard.DashboardActivity" />
         </activity>
-
         <activity
             android:name=".ui.akomodasi.detail.DetailAkomodasiActivity"
             android:screenOrientation="portrait">
@@ -42,7 +39,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.akomodasi.AkomodasiActivity" />
         </activity>
-
         <activity
             android:name=".ui.objek_wisata.detail.DetailObjekWisataActivity"
             android:screenOrientation="portrait">
@@ -50,8 +46,47 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.objek_wisata.ObjekWisataActivity" />
         </activity>
-
         <activity android:name=".ui.objek_wisata.ObjekWisataActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.dashboard.DashboardActivity" />
+        </activity>
+        <activity android:name=".ui.unggulan.UnggulanActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.dashboard.DashboardActivity" />
+        </activity>
+        <activity android:name=".ui.transportasi.TransportasiActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.dashboard.DashboardActivity" />
+        </activity>
+        <activity android:name=".ui.pelayanan_publik.PelayananPublikActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.dashboard.DashboardActivity" />
+        </activity>
+        <activity android:name=".ui.restoran.RestoranActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.dashboard.DashboardActivity" />
+        </activity>
+        <activity android:name=".ui.belanja.BelanjaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.dashboard.DashboardActivity" />
+        </activity>
+        <activity android:name=".ui.seni_budaya.SeniBudayaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.dashboard.DashboardActivity" />
+        </activity>
+        <activity android:name=".ui.aktifitas.AktifitasActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.dashboard.DashboardActivity" />
+        </activity>
+        <activity android:name=".ui.event.EventActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.dashboard.DashboardActivity" />

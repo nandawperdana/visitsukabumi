@@ -21,11 +21,18 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.presentation.presenters.DashboardPresenter;
 import com.studio.visitsukabumi.ui.akomodasi.AkomodasiActivity;
+import com.studio.visitsukabumi.ui.aktifitas.AktifitasActivity;
+import com.studio.visitsukabumi.ui.belanja.BelanjaActivity;
 import com.studio.visitsukabumi.ui.dashboard.adapter.DashboardAdapter;
 import com.studio.visitsukabumi.ui.dashboard.adapter.UnggulanSliderAdapter;
 import com.studio.visitsukabumi.ui.dashboard.mvp.DashboardModel;
 import com.studio.visitsukabumi.ui.dashboard.mvp.DashboardPresenterImpl;
+import com.studio.visitsukabumi.ui.event.EventActivity;
 import com.studio.visitsukabumi.ui.objek_wisata.ObjekWisataActivity;
+import com.studio.visitsukabumi.ui.pelayanan_publik.PelayananPublikActivity;
+import com.studio.visitsukabumi.ui.restoran.RestoranActivity;
+import com.studio.visitsukabumi.ui.seni_budaya.SeniBudayaActivity;
+import com.studio.visitsukabumi.ui.transportasi.TransportasiActivity;
 import com.studio.visitsukabumi.utils.commons.Enums;
 import com.studio.visitsukabumi.utils.commons.RecyclerItemClickListener;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -226,34 +233,25 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
                 openActivity(AkomodasiActivity.class);
                 break;
             case SENI_BUDAYA:
-                openActivity(AkomodasiActivity.class);
+                openActivity(SeniBudayaActivity.class);
                 break;
             case TEMPAT_MAKAN:
-                openActivity(AkomodasiActivity.class);
+                openActivity(RestoranActivity.class);
                 break;
             case BELANJA:
-                openActivity(AkomodasiActivity.class);
+                openActivity(BelanjaActivity.class);
                 break;
             case TRANSPORTASI:
-                openActivity(AkomodasiActivity.class);
+                openActivity(TransportasiActivity.class);
                 break;
-            case KANTOR:
-                openActivity(AkomodasiActivity.class);
-                break;
-            case PEMERINTAHAN:
-                openActivity(AkomodasiActivity.class);
-                break;
-            case LAYANAN_PUBLIK:
-                openActivity(AkomodasiActivity.class);
+            case PELAYANAN_PUBLIK:
+                openActivity(PelayananPublikActivity.class);
                 break;
             case AKTIVITAS:
-                openActivity(AkomodasiActivity.class);
+                openActivity(AktifitasActivity.class);
                 break;
-            case TIPS:
-                openActivity(AkomodasiActivity.class);
-                break;
-            case PROFIL:
-                openActivity(AkomodasiActivity.class);
+            case EVENT:
+                openActivity(EventActivity.class);
                 break;
         }
     }
