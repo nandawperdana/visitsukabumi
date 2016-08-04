@@ -18,6 +18,7 @@ import com.studio.visitsukabumi.presentation.presenters.AkomodasiPresenter;
 import com.studio.visitsukabumi.ui.akomodasi.AkomodasiActivity;
 import com.studio.visitsukabumi.ui.akomodasi.adapter.GridAdapter;
 import com.studio.visitsukabumi.ui.akomodasi.detail.DetailAkomodasiActivity;
+import com.studio.visitsukabumi.utils.commons.Constants;
 import com.studio.visitsukabumi.utils.commons.RecyclerItemClickListener;
 
 import java.util.List;
@@ -97,7 +98,7 @@ public class PondokFragment extends Fragment {
 
     private void openDetails(AkomodasiModel item) {
         Intent intent = new Intent(getActivity(), DetailAkomodasiActivity.class);
-        intent.putExtra("item", item);
+        intent.putExtra(Constants.Code.TAG_AKOMODASI, item);
         startActivity(intent);
     }
 

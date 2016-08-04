@@ -15,10 +15,11 @@ import android.widget.TextView;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.api.v1.transportasi.TransportasiModel;
 import com.studio.visitsukabumi.presentation.presenters.TransportasiPresenter;
-import com.studio.visitsukabumi.ui.akomodasi.detail.DetailAkomodasiActivity;
+import com.studio.visitsukabumi.ui.transportasi.DetailTransportasiActivity;
 import com.studio.visitsukabumi.ui.transportasi.TransportasiActivity;
 import com.studio.visitsukabumi.utils.adapter.ListItemAdapter;
 import com.studio.visitsukabumi.utils.adapter.RowListItem;
+import com.studio.visitsukabumi.utils.commons.Constants;
 import com.studio.visitsukabumi.utils.commons.RecyclerItemClickListener;
 
 import java.util.ArrayList;
@@ -101,8 +102,8 @@ public class TerminalFragment extends Fragment {
     }
 
     private void openDetails(TransportasiModel item) {
-        Intent intent = new Intent(getActivity(), DetailAkomodasiActivity.class);
-        intent.putExtra("item", item);
+        Intent intent = new Intent(getActivity(), DetailTransportasiActivity.class);
+        intent.putExtra(Constants.Code.TAG_TRANSPORTASI, item);
         startActivity(intent);
     }
 

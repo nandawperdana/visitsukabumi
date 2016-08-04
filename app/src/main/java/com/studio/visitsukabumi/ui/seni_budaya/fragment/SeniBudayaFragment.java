@@ -15,10 +15,11 @@ import android.widget.TextView;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.api.v1.senibudaya.SeniBudayaModel;
 import com.studio.visitsukabumi.presentation.presenters.TransportasiPresenter;
-import com.studio.visitsukabumi.ui.akomodasi.detail.DetailAkomodasiActivity;
+import com.studio.visitsukabumi.ui.seni_budaya.DetailSeniBudayaActivity;
 import com.studio.visitsukabumi.ui.seni_budaya.SeniBudayaActivity;
 import com.studio.visitsukabumi.utils.adapter.ListItemAdapter;
 import com.studio.visitsukabumi.utils.adapter.RowListItem;
+import com.studio.visitsukabumi.utils.commons.Constants;
 import com.studio.visitsukabumi.utils.commons.RecyclerItemClickListener;
 
 import java.util.ArrayList;
@@ -102,8 +103,8 @@ public class SeniBudayaFragment extends Fragment {
     }
 
     private void openDetails(SeniBudayaModel item) {
-        Intent intent = new Intent(getActivity(), DetailAkomodasiActivity.class);
-        intent.putExtra("item", item);
+        Intent intent = new Intent(getActivity(), DetailSeniBudayaActivity.class);
+        intent.putExtra(Constants.Code.TAG_SENI_BUDAYA, item);
         startActivity(intent);
     }
 

@@ -101,7 +101,7 @@ public class DetailObjekWisataActivity extends AppCompatActivity implements Deta
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.home:
+            case android.R.id.home:
                 onBackPressed();
                 return true;
             default:

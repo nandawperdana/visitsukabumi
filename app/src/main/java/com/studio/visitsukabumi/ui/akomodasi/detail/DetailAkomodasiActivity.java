@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -22,6 +23,7 @@ import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiModel;
 import com.studio.visitsukabumi.presentation.presenters.DetailAkomodasiPresenter;
 import com.studio.visitsukabumi.ui.akomodasi.detail.mvp.DetailAkomodasiPresenterImpl;
 import com.studio.visitsukabumi.ui.akomodasi.detail.mvp.DetailModel;
+import com.studio.visitsukabumi.utils.commons.Constants;
 
 import java.util.Locale;
 
@@ -76,7 +78,7 @@ public class DetailAkomodasiActivity extends AppCompatActivity implements Detail
     }
 
     private void parseBundleExtra(Intent intent) {
-        doRetrieveModel().setAkomodasiModel((AkomodasiModel) intent.getSerializableExtra("item"));
+        doRetrieveModel().setAkomodasiModel((AkomodasiModel) intent.getSerializableExtra(Constants.Code.TAG_AKOMODASI));
     }
 
     private void init() {
@@ -106,6 +108,9 @@ public class DetailAkomodasiActivity extends AppCompatActivity implements Detail
         }
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            toolbar.setTitleTextColor(getColor(R.color.white));
+        }
         actionBar.setTitle("Detail Akomodasi");
     }
 
@@ -113,7 +118,7 @@ public class DetailAkomodasiActivity extends AppCompatActivity implements Detail
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.home:
+            case android.R.id.home:
                 onBackPressed();
                 return true;
             default:

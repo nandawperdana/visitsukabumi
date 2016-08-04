@@ -15,10 +15,11 @@ import android.widget.TextView;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.api.v1.restoran.RestoranModel;
 import com.studio.visitsukabumi.presentation.presenters.PelayananPublikPresenter;
-import com.studio.visitsukabumi.ui.akomodasi.detail.DetailAkomodasiActivity;
+import com.studio.visitsukabumi.ui.restoran.DetailRestoranActivity;
 import com.studio.visitsukabumi.ui.restoran.RestoranActivity;
 import com.studio.visitsukabumi.utils.adapter.ListItemAdapter;
 import com.studio.visitsukabumi.utils.adapter.RowListItem;
+import com.studio.visitsukabumi.utils.commons.Constants;
 import com.studio.visitsukabumi.utils.commons.RecyclerItemClickListener;
 
 import java.util.ArrayList;
@@ -102,8 +103,8 @@ public class RumahMakanFragment extends Fragment {
     }
 
     private void openDetails(RestoranModel item) {
-        Intent intent = new Intent(getActivity(), DetailAkomodasiActivity.class);
-        intent.putExtra("item", item);
+        Intent intent = new Intent(getActivity(), DetailRestoranActivity.class);
+        intent.putExtra(Constants.Code.TAG_RESTORAN, item);
         startActivity(intent);
     }
 

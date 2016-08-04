@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.presentation.presenters.UnggulanPresenter;
 import com.studio.visitsukabumi.ui.unggulan.fragment.AccessibilityFragment;
 import com.studio.visitsukabumi.ui.unggulan.fragment.ActivitiesFragment;
+import com.studio.visitsukabumi.ui.unggulan.fragment.AkomodasiFragment;
 import com.studio.visitsukabumi.ui.unggulan.fragment.AmenitiesFragment;
 import com.studio.visitsukabumi.ui.unggulan.fragment.AncilliaryFragment;
 import com.studio.visitsukabumi.ui.unggulan.fragment.AttractionFragment;
@@ -126,6 +128,7 @@ public class UnggulanActivity extends AppCompatActivity implements UnggulanPrese
         viewPagerAdapter.addFragment(new AncilliaryFragment(), "Ancilliary");
         viewPagerAdapter.addFragment(new AccessibilityFragment(), "Accessibility");
         viewPagerAdapter.addFragment(new ActivitiesFragment(), "Activities");
+        viewPagerAdapter.addFragment(new AkomodasiFragment(), "Akomodasi");
 
         if (viewPager == null || tabLayout == null) {
             return;
@@ -138,6 +141,18 @@ public class UnggulanActivity extends AppCompatActivity implements UnggulanPrese
         tabLayout.setupWithViewPager(viewPager);
         //giving tablayout reference to viewPager so that the tablayout changes when viewPager is scrolled
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -158,6 +173,9 @@ public class UnggulanActivity extends AppCompatActivity implements UnggulanPrese
             }
             if (fragment instanceof ActivitiesFragment) {
                 doRetrieveModel().setActivitiesFragment((ActivitiesFragment) fragment);
+            }
+            if (fragment instanceof AkomodasiFragment) {
+                doRetrieveModel().setAkomodasiFragment((AkomodasiFragment) fragment);
             }
             Log.i("AttachFragment", "fragment " + fragment.toString());
         } catch (Exception e) {

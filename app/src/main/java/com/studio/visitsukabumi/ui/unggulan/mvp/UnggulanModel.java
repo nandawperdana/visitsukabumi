@@ -1,7 +1,9 @@
 package com.studio.visitsukabumi.ui.unggulan.mvp;
 
+import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiModel;
 import com.studio.visitsukabumi.ui.unggulan.fragment.AccessibilityFragment;
 import com.studio.visitsukabumi.ui.unggulan.fragment.ActivitiesFragment;
+import com.studio.visitsukabumi.ui.unggulan.fragment.AkomodasiFragment;
 import com.studio.visitsukabumi.ui.unggulan.fragment.AmenitiesFragment;
 import com.studio.visitsukabumi.ui.unggulan.fragment.AncilliaryFragment;
 import com.studio.visitsukabumi.ui.unggulan.fragment.AttractionFragment;
@@ -15,6 +17,7 @@ import java.util.List;
 public class UnggulanModel {
     com.studio.visitsukabumi.api.v1.unggulan.UnggulanModel unggulanModel;
     private List<com.studio.visitsukabumi.api.v1.unggulan.UnggulanModel> listUnggulan;
+    private AkomodasiModel akomodasiModel;
     private int page;
     private int fragmentSelected;
 
@@ -23,6 +26,7 @@ public class UnggulanModel {
     private ActivitiesFragment activitiesFragment;
     private AccessibilityFragment accessibilityFragment;
     private AncilliaryFragment ancilliaryFragment;
+    private AkomodasiFragment akomodasiFragment;
 
     public UnggulanModel() {
         this.unggulanModel = new com.studio.visitsukabumi.api.v1.unggulan.UnggulanModel();
@@ -91,5 +95,21 @@ public class UnggulanModel {
 
     public void setAncilliaryFragment(AncilliaryFragment ancilliaryFragment) {
         this.ancilliaryFragment = ancilliaryFragment;
+    }
+
+    public AkomodasiFragment getAkomodasiFragment() {
+        return akomodasiFragment;
+    }
+
+    public void setAkomodasiFragment(AkomodasiFragment akomodasiFragment) {
+        this.akomodasiFragment = akomodasiFragment;
+    }
+
+    public AkomodasiModel getAkomodasiModel() {
+        return akomodasiModel;
+    }
+
+    public void setAkomodasiModel(AkomodasiModel akomodasiModel) {
+        this.akomodasiModel = akomodasiModel;
     }
 }

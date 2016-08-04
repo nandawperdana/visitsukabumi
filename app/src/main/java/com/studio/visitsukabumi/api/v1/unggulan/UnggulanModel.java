@@ -3,8 +3,11 @@ package com.studio.visitsukabumi.api.v1.unggulan;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.studio.visitsukabumi.api.RootResponseModel;
+import com.studio.visitsukabumi.api.v1.akomodasi.AkomodasiModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by NwP.
@@ -47,6 +50,9 @@ public class UnggulanModel extends RootResponseModel implements Serializable {
     @SerializedName("foto_url")
     @Expose
     private String fotoUrl;
+    @SerializedName("akomodasi")
+    @Expose
+    private List<AkomodasiModel> akomodasi = new ArrayList<AkomodasiModel>();
 
     /**
      * @return The id
@@ -216,4 +222,17 @@ public class UnggulanModel extends RootResponseModel implements Serializable {
         this.fotoUrl = fotoUrl;
     }
 
+    /**
+     * @return The akomodasi
+     */
+    public List<AkomodasiModel> getAkomodasi() {
+        return akomodasi;
+    }
+
+    /**
+     * @param akomodasi The akomodasi
+     */
+    public void setAkomodasi(List<AkomodasiModel> akomodasi) {
+        this.akomodasi = akomodasi;
+    }
 }

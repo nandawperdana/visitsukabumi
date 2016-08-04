@@ -19,5 +19,15 @@ public final class Constants {
 
         public static final String TAG_PREF_SENT_TOKEN = "sent_token";
         public static final String TAG_PREF_REG_COMPLETED = "registration_completed";
+
+        public static final String TAG_AKTIFITAS = "item_aktifitas";
+        public static final String TAG_AKOMODASI = "item_akomodasi";
+        public static final String TAG_BELANJA = "item_belanja";
+        public static final String TAG_EVENT = "item_event";
+        public static final String TAG_OBJEK_WISATA = "item_objek_wisata";
+        public static final String TAG_PELAYANAN_PUBLIK = "item_pelayanan_publik";
+        public static final String TAG_RESTORAN = "item_restoran";
+        public static final String TAG_SENI_BUDAYA = "item_seni_budaya";
+        public static final String TAG_TRANSPORTASI = "item_transportasi";
     }
 }

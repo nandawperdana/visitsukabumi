@@ -15,10 +15,11 @@ import android.widget.TextView;
 import com.studio.visitsukabumi.R;
 import com.studio.visitsukabumi.api.v1.aktifitas.AktifitasModel;
 import com.studio.visitsukabumi.presentation.presenters.TransportasiPresenter;
-import com.studio.visitsukabumi.ui.akomodasi.detail.DetailAkomodasiActivity;
 import com.studio.visitsukabumi.ui.aktifitas.AktifitasActivity;
+import com.studio.visitsukabumi.ui.belanja.DetailBelanjaActivity;
 import com.studio.visitsukabumi.utils.adapter.ListItemAdapter;
 import com.studio.visitsukabumi.utils.adapter.RowListItem;
+import com.studio.visitsukabumi.utils.commons.Constants;
 import com.studio.visitsukabumi.utils.commons.RecyclerItemClickListener;
 
 import java.util.ArrayList;
@@ -102,8 +103,8 @@ public class PasarFragment extends Fragment {
     }
 
     private void openDetails(AktifitasModel item) {
-        Intent intent = new Intent(getActivity(), DetailAkomodasiActivity.class);
-        intent.putExtra("item", item);
+        Intent intent = new Intent(getActivity(), DetailBelanjaActivity.class);
+        intent.putExtra(Constants.Code.TAG_BELANJA, item);
         startActivity(intent);
     }
 

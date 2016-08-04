@@ -3,6 +3,7 @@ package com.studio.visitsukabumi.ui.dashboard;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
@@ -39,6 +40,7 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -146,6 +148,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.PELAYANAN_PUBLIK, "Pelayanan Publik", R.drawable.ic_pelayanan_publik));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.EVENT, "Event", R.drawable.ic_event));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.AKTIVITAS, "Aktifitas", R.drawable.ic_aktivitas));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KONTAK, "Kontak", R.drawable.ic_empty));
     }
 
     @Override
@@ -253,7 +256,20 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
             case EVENT:
                 openActivity(EventActivity.class);
                 break;
+            case KONTAK:
+                openActivity(EventActivity.class);
+                break;
+            case MAP:
+                openMap();
+                break;
         }
+    }
+
+    private void openMap() {
+        String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Float.parseFloat("-6.9370126"),
+                Float.parseFloat("106.8822901"));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        startActivity(intent);
     }
 
     private void openActivity(Class activity) {
