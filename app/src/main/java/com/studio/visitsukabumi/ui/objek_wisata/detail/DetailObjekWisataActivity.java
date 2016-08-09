@@ -94,7 +94,7 @@ public class DetailObjekWisataActivity extends AppCompatActivity implements Deta
         }
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Detail Objek Wisata");
+        actionBar.setTitle("Detail Atraksi Wisata");
     }
 
     @Override

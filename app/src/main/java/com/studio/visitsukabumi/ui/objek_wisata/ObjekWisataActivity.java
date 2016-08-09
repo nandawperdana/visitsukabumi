@@ -113,7 +113,7 @@ public class ObjekWisataActivity extends AppCompatActivity implements ObjekWisat
         }
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Objek Wisata");
+        actionBar.setTitle("Atraksi Wisata");
     }
 
     private void setupViewPager(ViewPager viewPager) {

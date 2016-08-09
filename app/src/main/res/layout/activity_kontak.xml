@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?><!--<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:id="@+id/coordinatorlayout_kontak"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:orientation="vertical"--><!--tools:context="com.studio.visitsukabumi.ui.akomodasi.detail.DetailObjekWisataActivity">--><!--<android.support.design.widget.AppBarLayout--><!--android:id="@+id/appbar_kontak"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:fitsSystemWindows="true"--><!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_kontak"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:titleTextColor="@color/white"
+        app:layout_collapseMode="pin"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageview_kontak"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_empty" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_kontak"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_alignBottom="@+id/imageview_row_grid_menu"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/black_50"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textview_kontak_nama"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="Name"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <TableRow
+                android:id="@+id/tablerow_alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageview_kontak"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Alamat"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_extra_large"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_kontak_alamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:text="Jalan Sukawayana Cisolok"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_extra_large" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tablerow_telp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tablerow_pemilik"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Telp."
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_extra_large"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_kontak_telp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:text="022 7461927"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_extra_large" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tablerow_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tablerow_telp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Email"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_extra_large"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_kontak_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:text="email"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_extra_large" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tablerow_website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tablerow_email"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Website"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_extra_large"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_kontak_website"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:text=""
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_extra_large" />
+
+            </TableRow>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout><!--</android.support.design.widget.CoordinatorLayout>-->

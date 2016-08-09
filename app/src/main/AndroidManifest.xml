@@ -7,16 +7,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />-->
+
+    <!-- <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" /> -->
     <!-- Required to show current location -->
-    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
-    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
-
+    <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
     <!-- Required OpenGL ES 2.0. for Maps V2 -->
-    <!--<uses-feature-->
-        <!--android:glEsVersion="0x00020000"-->
-        <!--android:required="true" />-->
-
+    <!-- <uses-feature -->
+    <!-- android:glEsVersion="0x00020000" -->
+    <!-- android:required="true" /> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,12 +25,13 @@
         android:theme="@style/AppTheme">
 
         <!-- Add Google Map Library -->
-        <!--<uses-library android:name="com.google.android.maps" />-->
+        <!-- <uses-library android:name="com.google.android.maps" /> -->
+
 
         <!-- Goolge API Key -->
-        <!--<meta-data-->
-            <!--android:name="com.google.android.maps.v2.API_KEY"-->
-            <!--android:value="AIzaSyC2YAY0VgxAiBimsZWB9NLZPFMYim2Eo3k" />-->
+        <!-- <meta-data -->
+        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
+        <!-- android:value="AIzaSyC2YAY0VgxAiBimsZWB9NLZPFMYim2Eo3k" /> -->
 
         <activity
             android:name=".ui.splash.SplashActivity"
@@ -195,7 +195,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.transportasi.TransportasiActivity" />
         </activity>
-        <activity android:name=".ui.map.MapActivity"></activity>
+        <activity android:name=".ui.map.MapActivity" />
+        <activity android:name=".ui.kontak.KontakActivity"></activity>
     </application>
 
 </manifest>

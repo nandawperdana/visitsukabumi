@@ -29,6 +29,7 @@ import com.studio.visitsukabumi.ui.dashboard.adapter.UnggulanSliderAdapter;
 import com.studio.visitsukabumi.ui.dashboard.mvp.DashboardModel;
 import com.studio.visitsukabumi.ui.dashboard.mvp.DashboardPresenterImpl;
 import com.studio.visitsukabumi.ui.event.EventActivity;
+import com.studio.visitsukabumi.ui.kontak.KontakActivity;
 import com.studio.visitsukabumi.ui.objek_wisata.ObjekWisataActivity;
 import com.studio.visitsukabumi.ui.pelayanan_publik.PelayananPublikActivity;
 import com.studio.visitsukabumi.ui.restoran.RestoranActivity;
@@ -138,7 +139,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
         this.mListMenu = new ArrayList<DashboardModel.Menu>();
 
         // menu list
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.OBJEK_WISATA, "Objek Wisata", R.drawable.ic_objek_wisata));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.OBJEK_WISATA, "Atraksi Wisata", R.drawable.ic_objek_wisata));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.AKOMODASI, "Akomodasi", R.drawable.ic_akomodasi));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.TEMPAT_MAKAN, "Tempat Makan", R.drawable.ic_rumah_makan));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.TRANSPORTASI, "Transportasi", R.drawable.ic_transportasi));
@@ -148,7 +149,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.PELAYANAN_PUBLIK, "Pelayanan Publik", R.drawable.ic_pelayanan_publik));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.EVENT, "Event", R.drawable.ic_event));
         mListMenu.add(new DashboardModel.Menu(Enums.Menu.AKTIVITAS, "Aktifitas", R.drawable.ic_aktivitas));
-        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KONTAK, "Kontak", R.drawable.ic_empty));
+        mListMenu.add(new DashboardModel.Menu(Enums.Menu.KONTAK, "Kontak", R.drawable.ic_kontak));
     }
 
     @Override
@@ -257,7 +258,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardPre
                 openActivity(EventActivity.class);
                 break;
             case KONTAK:
-                openActivity(EventActivity.class);
+                openActivity(KontakActivity.class);
                 break;
             case MAP:
                 openMap();
