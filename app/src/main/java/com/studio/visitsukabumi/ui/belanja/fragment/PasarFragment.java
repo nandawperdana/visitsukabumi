@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.studio.visitsukabumi.R;
-import com.studio.visitsukabumi.api.v1.aktifitas.AktifitasModel;
+import com.studio.visitsukabumi.api.v1.belanja.BelanjaModel;
 import com.studio.visitsukabumi.presentation.presenters.TransportasiPresenter;
-import com.studio.visitsukabumi.ui.aktifitas.AktifitasActivity;
+import com.studio.visitsukabumi.ui.belanja.BelanjaActivity;
 import com.studio.visitsukabumi.ui.belanja.DetailBelanjaActivity;
 import com.studio.visitsukabumi.utils.adapter.ListItemAdapter;
 import com.studio.visitsukabumi.utils.adapter.RowListItem;
@@ -41,7 +41,7 @@ public class PasarFragment extends Fragment {
     ProgressDialog progressDialog;
 
     List<RowListItem> listItemShow;
-    List<AktifitasModel> listItems;
+    List<BelanjaModel> listItems;
 
     public PasarFragment() {
         // Required empty public constructor
@@ -65,7 +65,7 @@ public class PasarFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                AktifitasModel item = listItems.get(position);
+                BelanjaModel item = listItems.get(position);
                 openDetails(item);
             }
         }));
@@ -73,7 +73,7 @@ public class PasarFragment extends Fragment {
 
     private void init(View view) {
         this.listItemShow = new ArrayList<>();
-        this.listItems = ((AktifitasActivity) getActivity()).doRetrieveModel().getListItems();
+        this.listItems = ((BelanjaActivity) getActivity()).doRetrieveModel().getListBelanjaPasar();
         initLayout(view);
     }
 
@@ -93,8 +93,8 @@ public class PasarFragment extends Fragment {
             showScreenState(TransportasiPresenter.TransportasiView.ScreenState.SCREEN_BLANK);
         else {
             listItemShow.clear();
-            for (AktifitasModel item : listItems) {
-                listItemShow.add(new RowListItem(item.getNama(), item.getDeskripsi(), item.getFotoUrl()));
+            for (BelanjaModel item : listItems) {
+                listItemShow.add(new RowListItem(item.getNama(), item.getAlamat(), item.getFotoUrl()));
             }
 
             recyclerView.getAdapter().notifyDataSetChanged();
@@ -102,7 +102,7 @@ public class PasarFragment extends Fragment {
         }
     }
 
-    private void openDetails(AktifitasModel item) {
+    private void openDetails(BelanjaModel item) {
         Intent intent = new Intent(getActivity(), DetailBelanjaActivity.class);
         intent.putExtra(Constants.Code.TAG_BELANJA, item);
         startActivity(intent);
